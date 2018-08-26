@@ -1,0 +1,26 @@
+<h1><%= @user.username %>'s profile </h1>
+<% if current_user.admin  %>
+<h3>ADMIN</h3>
+    <p>
+    <%= button_to "Edit #{current_user.username}", edit_user_path(@user), method: :get %>
+    <%= form_tag user_path(@user.id), method: "delete" do %>
+        <%= submit_tag "Delete #{@user.username}" %>
+        <% end %>
+    <%= button_to 'See all Companies', companies_path, method: :get %>
+    <%= button_to 'Log Out', signout_path, method: :get%>
+    </p>
+  <% else %>
+    <p>
+    <%= button_to 'Edit', edit_user_path(@user), method: :get %>
+    <%= form_tag user_path(@user.id), method: "delete" do %>
+        <%= submit_tag "Delete #{@user.username}" %>
+    <br></br>
+    <%= button_to 'See all Companies', companies_path, method: :get %>
+    <br></br>
+    <%= button_to 'Create a new Review', new_review_path, method: :get %>
+    <br></br>
+    <%= button_to 'Log Out', signout_path, method: :get%>
+    <br></br>
+    <% end %>
+    </p>
+  <% end %>

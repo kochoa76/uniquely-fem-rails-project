@@ -1,0 +1,19 @@
+<h1>Log In</h1>
+<%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<br></br>
+
+<%=form_tag({url: '/signin', method: :post}) do %>
+    <%= label_tag :username %>
+    <%= text_field_tag :username %>
+    <br></br>
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+    <br></br>
+    <%= label_tag :password %>
+    <%= password_field_tag :password%>
+    <br></br>
+    <%= submit_tag "Log In" %>
+    <% end %>
+    <h4><%= flash[:notice] %><h4>
+
+      <!-- {url: '/signin', method: :post} -->

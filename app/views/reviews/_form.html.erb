@@ -1,0 +1,24 @@
+<h2> Create a Review for <%=@company.name%> </h2>
+<%= form_for([@company, @review]) do |f| %>
+
+      <%= f.label :salary, "Your Salary:" %>
+      <%= f.number_field :salary %>
+      <br></br>
+      <%= f.label :women_exec_roles, "Are there women in leadership positions?" %>
+      <%= f.check_box :women_exec_roles %>
+      <br></br>
+      <%= f.label :promo_opps, "Are there opportunities for promotion for women?" %>
+      <%= f.check_box :promo_opps %>
+      <br></br>
+      <%= f.label :recommend, "Would you recommend this company to another a female friend?" %>
+      <%= f.check_box :recommend %>
+      <br></br>
+      <%= f.label :job_rating, "What is your overall job satisfaction rating?" %>
+      <%= f.number_field :job_rating %>
+      <br></br>
+      <%= f.label :content, "Any other details about the company (i.e. Maternity leave, remote work flexibility, company wide training etc.)" %>
+      <br></br>
+      <%= f.text_area :content %>
+      <br></br>
+ <%= f.submit %>
+<% end %>

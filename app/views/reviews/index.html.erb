@@ -1,0 +1,37 @@
+<h2>All Reviews for <%=@company.name%> </h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+<ul>
+  <% @company.reviews.each do |review| %>
+  <p><%= review.user.username %> says:</p>
+    <li><strong>salary:</strong> <%= review.salary %></li>
+    <li><strong>Are there women in leadership positions?</strong> <%= review.women_exec_roles %></li>
+    <li><strong>Are there opportunities for promotion for women?</strong> <%= review.promo_opps %></li>
+    <li><strong>Would you recommend this company to a female fri</strong>end? <%= review.recommend %></li>
+    <li><strong>What is your overall job satisfaction rating?(1-5) </strong><%= review.job_rating %></li>
+    <li><strong>Any other details about the company
+      (i.e. Maternity leave, remote work flexibility, company wide training etc.)</strong></li>
+      <%=review.content%></p>
+      <% if logged_in && review.user_id == current_user.id %>
+        <p>
+          <%= button_to "Edit Review", edit_company_review_path(@company, review) %>
+          <%= button_to "Delete Review", company_review_path(@company, review), :method => :delete, :class => "delete", :confirm => "Are you sure ?"%>
+          <%= button_to "See Company", company_path(@company), :method => :get %>
+          <%= button_to "See all companies", companies_url, :method=> :get %>
+            </p>
+          <% end %>
+        <% end %>
+      </ul>
+
+
+
+    <% if logged_in && @user == current_user %>
+        <p>
+          <%= link_to "My Account", user %>
+          <%= link_to "My Reviews", review_path(current_user.review) %>
+      <% end %>
