@@ -11,12 +11,12 @@
     <% end %>
     </ul>
   </div>
-<% end %> 
+<% end %>
 
 <%= form_for([@company, @review]) do |f| %>
 
       <%= f.label :salary, "Your Salary:" %>
-      <%= f.number_field :salary %>
+      <%= f.number_field :salary, required: true  %>
       <br></br>
       <%= f.label :women_exec_roles, "Are there women in leadership positions?" %>
       <%= f.check_box :women_exec_roles %>
@@ -28,7 +28,7 @@
       <%= f.check_box :recommend %>
       <br></br>
       <%= f.label :job_rating, "What is your overall job satisfaction rating?" %>
-      <%= f.number_field :job_rating %>
+      <%= f.number_field :job_rating, required: true  %>
       <br></br>
       <%= f.label :content, "Any other details about the company (i.e. Maternity leave, remote work flexibility, company wide training etc.)" %>
       <br></br>

@@ -3,12 +3,12 @@
 <%= form_for @user do |f| %>
     <%= f.label :password, "Password:" %>
     <br>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, required: true  %>
     <br></br>
 
     <%= f.label :email, "Email:" %>
     <br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, required: true  %>
     <br></br>
 
     <%= f.label :admin, "Check box if admin" %>

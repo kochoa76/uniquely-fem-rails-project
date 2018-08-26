@@ -17,11 +17,45 @@
 
  /* CSS for main views */
 
- html, body {
+  body {
      font-family: 'Source Serif Pro', serif;
-     height: 100%;
-     width: 100%;
      text-align: center;
      background-color: #E6E6FA;
      color: 	#4B0082;
+     display: block;
+     margin-left: 100px;
+     margin-right: 190px;
+     margin-bottom: 100px;
+     margin-top: 170px;
+     font-size: 17px;
+     list-style-type: none;
    }
+
+
+ .field_with_errors {
+   padding: 2px;
+   background-color: pink;
+   display: table;
+ }
+
+ div.container {
+    position: relative;
+    min-height: 100%;
+  }
+
+
+ .table {
+   margin-left: 100px;
+   border-spacing: 70px 10px;
+
+ }
+
+ .table2 {
+
+   margin-left: 260px;
+   border-spacing: 70px 10px;
+ }
+
+ ul {
+   list-style-type:none;
+ }

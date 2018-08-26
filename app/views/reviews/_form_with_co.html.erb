@@ -16,7 +16,7 @@
 <%= form_for(@review) do |f| %>
       <%= f.fields_for :company, @review.build_company do |company| %>
       <%= company.label :name, "Company Name:" %>
-      <%= company.text_field :name, list: "companies_autocomplete" %>
+      <%= company.text_field :name, list: "companies_autocomplete", required: true %>
         <datalist id= "companies_autocomplete">
             <% Company.all.each do |company| %>
             <option value="<%=company.name%>">
@@ -25,7 +25,7 @@
       <% end %>
       <br></br>
       <%= f.label :salary, "Your Salary:" %>
-      <%= f.number_field :salary %>
+      <%= f.number_field :salary, required: true %>
       <br></br>
       <%= f.label :women_exec_roles, "Are there women in leadership positions?" %>
       <%= f.check_box :women_exec_roles %>
@@ -37,7 +37,7 @@
       <%= f.check_box :recommend %>
       <br></br>
       <%= f.label :job_rating, "What is your overall job satisfaction rating?" %>
-      <%= f.number_field :job_rating %>
+      <%= f.number_field :job_rating, required: true  %>
       <br></br>
       <%= f.label :content, "Any other details about the company (i.e. Maternity leave, remote work flexibility, company wide training etc.)" %>
       <br></br>
