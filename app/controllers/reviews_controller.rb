@@ -36,12 +36,12 @@ class ReviewsController < ApplicationController
           end
         end
 
-    # def show
-    #      @user = User.find(params[:user_id])
-    #      @review = Review.find(params[:id])
-    #
-    #      redirect_to :controller => 'reviews', :action => 'show'
-    #  end
+    def show
+         @user = User.find(params[:user_id])
+         @review = Review.find(params[:id])
+
+         redirect_to :controller => 'reviews', :action => 'show'
+     end
 
      def edit
             @company = Company.find(params[:company_id])

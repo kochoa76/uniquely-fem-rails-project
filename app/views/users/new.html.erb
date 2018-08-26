@@ -1,5 +1,7 @@
 <h1>Sign Up</h1>
 
-<%= link_to('Sign Up with Facebook!', 'auth/facebook') %>
+<%= link_to 'Sign Up with Facebook!', 'auth/facebook', method: :get %>
+<br></br>
+<%= link_to "Log In", signin_path, method: :get %>
 <br></br>
 <%= render 'form' %>

@@ -8,7 +8,7 @@
 
 <ul>
   <% @company.reviews.each do |review| %>
-  <p><%= review.user.username %> says:</p>
+    <p><%= review.user.username %> says:</p> 
     <li><strong>salary:</strong> <%= review.salary %></li>
     <li><strong>Are there women in leadership positions?</strong> <%= review.women_exec_roles %></li>
     <li><strong>Are there opportunities for promotion for women?</strong> <%= review.promo_opps %></li>
