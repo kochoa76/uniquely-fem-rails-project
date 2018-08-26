@@ -12,7 +12,7 @@ resources :users do
 
 
 
-get 'auth/facebook/callback', to: 'sessions#create'
+get 'auth/facebook/callback' => 'sessions#create'
 get '/signin' => "sessions#new"
 post '/signin' => "sessions#create"
 get '/signout' => "sessions#destroy"
