@@ -26,18 +26,18 @@
         <td><%= button_to "Submit a review for this Company", new_company_review_path(company), :method=> :get%></td>
         <% if logged_in && current_user.admin %>
         <td><%= button_to "Delete Company", company_path(company), :method => :delete, :class => "delete", :confirm => "Are you sure?"%></td>
+        <td><%= button_to "Edit Company", company_path(company), method: :get %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br></br>
-    <% if logged_in && current_user %>
+    <% if logged_in && !current_user.admin %>
         <p>
           <%= button_to "Back to Profile", user_path(current_user), method: :get %>
-      <% elsif logged_in && current_user.admin %>
-        <p>
-          <%= button_to "Create a Company", new_company_path %>
-          <%= button_to "Edit Company", company_path(@company) %>
         </p>
+    <% else %>
+      <td><%= button_to "Create a Company", new_company_path, method: :get %></td>
+      <td><%= button_to "Back to Profile", user_path(current_user), method: :get %></td>
     <% end %>

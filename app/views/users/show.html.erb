@@ -13,15 +13,12 @@
   <% end %>
   <% if !current_user.admin && logged_in %>
     <p>
-    <%= button_to 'Edit', edit_user_path(@user), method: :get %>
+    <%= button_to "Edit #{current_user.username}", edit_user_path(@user), method: :get %>
     <%= form_tag user_path(@user.id), method: "delete" do %>
         <%= submit_tag "Delete #{@user.username}" %>
         <% end %>
-    <br></br>
     <%= button_to 'See all Companies', companies_path, method: :get %>
-    <br></br>
     <%= button_to 'Create a new Review', new_review_path, method: :get %>
-    <br></br>
     <%= button_to 'Log Out', signout_path, method: :get%>
     <br></br>
     </p>

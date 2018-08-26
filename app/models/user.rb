@@ -9,10 +9,6 @@ class User < ApplicationRecord
   # helper_method :set_anonymous_username
   has_secure_password
 
-  # def self.set_anonymous_username
-  #   @user.username = "anonymous#{User.last.id + 1}"
-  #   @user.update(username: params[:username])
-  # end
 
   def self.from_omniauth(auth)
         where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|

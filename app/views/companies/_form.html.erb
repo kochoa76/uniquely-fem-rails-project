@@ -1,4 +1,4 @@
-<%= if current_user.admin %>
+
   <% if @company.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -14,7 +14,7 @@
     </div>
   <% end %>
 
-
+<% if current_user.admin && logged_in %>
   <%= form_for(@company) do |f| %>
       <p>
         <%= f.label :name, "Company Name:" %>
@@ -23,5 +23,12 @@
         <%= f.label :size, "Company Size:" %>
         <%= f.number_field :size %>
         <br></br>
+        <%= f.label :city, "City:" %>
+        <%= f.text_field :city %>
+        <br></br>
+        <%= f.label :state, "State" %>
+        <%= f.text_field :state %> 
+        <br></br>
         <%= f.submit %></p>
+      <% end %>
   <% end %>

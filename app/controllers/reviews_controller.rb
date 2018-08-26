@@ -36,25 +36,25 @@ class ReviewsController < ApplicationController
           end
         end
 
-    def show
-         @user = User.find(params[:user_id])
-         @review = Review.find(params[:id])
-
-         redirect_to :controller => 'reviews', :action => 'show'
-     end
+    # def show
+    #      @user = User.find(params[:user_id])
+    #      @review = Review.find(params[:id])
+    #
+    #      redirect_to :controller => 'reviews', :action => 'show'
+    #  end
 
      def edit
             @company = Company.find(params[:company_id])
-            @review = @company.comments.find(params[:id])
+            @review = @company.reviews.find(params[:id])
         end
 
     def update
             @company = Company.find(params[:company_id])
             @review = @company.reviews.find(params[:id])
-            if @review.update(review_params)
-                redirect_to @company
+            if @review.update(reviews_params)
+                redirect_to company_reviews_path(@company)
             else
-                render 'companies/show'
+                render :edit
             end
         end
 
@@ -63,7 +63,7 @@ class ReviewsController < ApplicationController
             @review = @company.reviews.find(params[:id])
             if @review.user_id == current_user.id
               @review.destroy
-              redirect_to company_path
+              redirect_to company_reviews_path(@company)
             end
           end
 
