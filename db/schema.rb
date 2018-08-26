@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_25_233952) do
+ActiveRecord::Schema.define(version: 2018_08_26_161747) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -32,11 +32,6 @@ ActiveRecord::Schema.define(version: 2018_08_25_233952) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -46,6 +41,9 @@ ActiveRecord::Schema.define(version: 2018_08_25_233952) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "oauth_token"
+    t.datetime "oath_expires_at"
+    t.string "provider"
   end
 
 end

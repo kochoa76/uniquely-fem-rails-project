@@ -11,6 +11,7 @@ gem 'sqlite3'
 gem 'puma', '~> 3.11'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'activestorage', '= 5.2.1'
 gem 'dotenv-rails'
 gem 'bcrypt'
 # Use SCSS for stylesheets
@@ -39,6 +40,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootstrap-sass', '3.3.7'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -53,7 +55,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'thin'
-   gem 'pry'
+  gem 'pry'
+  gem 'database_cleaner'
+  gem 'rack_session_access'
 end
 
 group :test do

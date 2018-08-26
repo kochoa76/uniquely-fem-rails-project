@@ -10,10 +10,10 @@ class UsersController < ApplicationController
 
   def create
         @user = User.new(user_params)
-        @user.username = "anonymous#{User.last.id + 1}" if @user.username.nil?
+        @user.username =  @user.username = "anonymous#{User.last.id + 1}" if @user.username.nil?
         if @user.save
-          session[:user_id] = @user.id
-          redirect_to @user
+        session[:user_id] = @user.id
+        redirect_to @user
         else
            render '/users/new'
         end
@@ -40,6 +40,10 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:password, :password_confirmation, :email, :admin)
+    params.require(:user).permit(:password, :password_confirmation, :email, :admin, :uid, :provider, :oauth_token, :oauth_expires_at, :image)
   end
+
+  def set_auth
+        @auth = session[:omniauth] if session[:omniauth]
+    end
 end

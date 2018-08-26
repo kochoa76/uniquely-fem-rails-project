@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+ @import url('https://fonts.google.com/specimen/Source+Serif+Pro');
+
+ /* CSS for main views */
+
+ html, body {
+     font-family: 'Source Serif Pro', serif;
+     height: 100%;
+     width: 100%;
+     text-align: center;
+     background-color: #E6E6FA;
+     color: 	#4B0082;
+   }

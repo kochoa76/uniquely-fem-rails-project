@@ -1,6 +1,8 @@
 <h1>Log In</h1>
 <%= link_to('Log in with Facebook!', '/auth/facebook') %>
 <br></br>
+<%= link_to "Sign Up", new_user_path %>
+<br></br>
 
 <%=form_tag({url: '/signin', method: :post}) do %>
     <%= label_tag :username %>
