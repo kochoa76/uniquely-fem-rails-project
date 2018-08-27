@@ -12,6 +12,7 @@
       <td><strong># Employees </strong></td>
       <td><strong>City (hq) </strong></td>
       <td><strong>State </strong></td>
+      <td><strong> Avg Rating by Reviews </strong></td>
     </tr>
 
     <tr>
@@ -19,6 +20,7 @@
       <td><%= @company.size %></td>
       <td><%= @company.city %></td>
       <td><%= @company.state %></td>
+      <td><%= @company.reviews.avg_rated %></td> 
     </tr>
   </tbody>
 </table>

@@ -12,8 +12,9 @@
     <li><strong>salary:</strong> <%= review.salary %></li>
     <li><strong>Are there women in leadership positions?</strong> <%= review.women_exec_roles %></li>
     <li><strong>Are there opportunities for promotion for women?</strong> <%= review.promo_opps %></li>
-    <li><strong>Would you recommend this company to a female fri</strong>end? <%= review.recommend %></li>
+    <li><strong>Would you recommend this company to a female friend? </strong><%= review.recommend %></li>
     <li><strong>What is your overall job satisfaction rating?(1-5) </strong><%= review.job_rating %></li>
+    <li><strong>Date Review Posted </strong></li><%= review.created_at.strftime('%m-%d-%Y')%></li>
     <li><strong>Any other details about the company
       (i.e. Maternity leave, remote work flexibility, company wide training etc.)</strong></li>
       <%=review.content%></p>

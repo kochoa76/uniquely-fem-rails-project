@@ -43,5 +43,8 @@
       <br></br>
       <%= f.text_area :content %>
       <br></br>
+      <%= f.label :created_at, "Date Review Posted" %>
+      <%= f.date_field :created_at,:value => Time.now.strftime('%m-%d-%Y')%>
+      <br></br>
  <%= f.submit %>
 <% end %>
