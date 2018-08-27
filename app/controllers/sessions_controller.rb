@@ -1,21 +1,25 @@
 class SessionsController < ApplicationController
 
   def create
-       @auth = request.env["omniauth.auth"]
-       if @auth
-           @user = User.from_omniauth(request.env["omniauth.auth"])
-           session[:user_id] = @user.id
-           render user_path(@user), notice: "Successfully signed in"
+    @auth = request.env["omniauth.auth"]
+    if @auth
+        @user = User.from_omniauth(request.env["omniauth.auth"])
+        session[:user_id] = @user.id
+        @user.username = "anonymous#{User.last.id + 1}"
+        flash[:notice]= "Successfully signed in"
+        render 'users/show'
+    else
+        @user = User.find_by(email: params[:email])
+          if @user && @user.authenticate(params[:password])
+             session[:user_id] = @user.id
+             flash[:notice]= "Successfully signed in"
+             redirect_to user_path(@user)
           else
-           @user = User.find_by(email: params[:email])
-            if @user && @user.authenticate(params[:password])
-               session[:user_id] = @user.id
-               redirect_to user_path(@user)
-           else
-               render '/sessions/new', :notice => "Username/email/password incorrect or can't be blank"
-           end
-       end
-   end
+             flash[:notice]= "Username/email/password incorrect or can't be blank"
+             render '/sessions/new'
+          end
+        end
+      end
 
     def destroy
       session[:user_id] = nil

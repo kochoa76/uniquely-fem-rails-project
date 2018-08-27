@@ -4,6 +4,10 @@
 <%= link_to "Sign Up", new_user_path %>
 <br></br>
 
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+<br>
 <%=form_tag({url: '/signin', method: :post}) do %>
     <%= label_tag :username %>
     <%= text_field_tag :username, nil, :required => true %>

@@ -1,5 +1,9 @@
 <h1><%= @user.username %>'s profile </h1>
 
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
 <% if current_user.admin  %>
 <h3>ADMIN</h3>
     <p>
@@ -31,3 +35,6 @@
     <br></br>
     </p>
   <% end %>
+
+  <%= link_to "users all", users_path %>
+  <%= @user.id %> 

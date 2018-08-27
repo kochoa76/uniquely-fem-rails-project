@@ -10,9 +10,10 @@ class UsersController < ApplicationController
 
   def create
         @user = User.new(user_params)
-        @user.username =  @user.username = "anonymous#{User.last.id + 1}" if @user.username.nil?
+        @user.username = "anonymous#{User.last.id + 1 }" if @user.username.nil?
         if @user.save
         session[:user_id] = @user.id
+        flash[:notice]= "Successfully created account"
         redirect_to @user
         else
            render '/users/new'

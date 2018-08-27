@@ -11,8 +11,8 @@ resources :users do
   end
 
 
-get 'auth/:provider/callback', to: 'sessions#create'
-# get 'auth/facebook/callback' => 'sessions#create'
+# get 'auth/:provider/callback', to: 'sessions#create'
+get 'auth/facebook/callback' => 'sessions#create'
 get '/signin' => "sessions#new"
 post '/signin' => "sessions#create"
 get '/signout' => "sessions#destroy"

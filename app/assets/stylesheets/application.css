@@ -33,9 +33,10 @@
 
 
  .field_with_errors {
-   padding: 2px;
+   padding: 20px;
    background-color: pink;
    display: table;
+   margin: auto auto; 
  }
 
  div.container {
