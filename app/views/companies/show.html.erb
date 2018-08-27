@@ -9,10 +9,11 @@
   <tbody>
     <tr>
       <td><strong>Name </strong></td>
-      <td><strong># Employees </strong></td>
+      <td><strong>Number of Employees </strong></td>
       <td><strong>City (hq) </strong></td>
       <td><strong>State </strong></td>
-      <td><strong> Avg Rating by Reviews </strong></td>
+      <td><strong> Average Rating by Reviews </strong></td>
+      <td><strong> Number of Reviews </strong></td>
     </tr>
 
     <tr>
@@ -20,10 +21,15 @@
       <td><%= @company.size %></td>
       <td><%= @company.city %></td>
       <td><%= @company.state %></td>
-      <td><%= @company.reviews.avg_rated %></td> 
+      <td><%= @company.reviews.avg_rated %></td>
+      <td><%= @company.reviews.count %></td>
     </tr>
   </tbody>
 </table>
+<br></br>
+<% if @company.reviews.exists? %>
+<%= button_to "See #{@company.name} reviews", company_reviews_path(@company), :method=> :get %>
+<% end %>
 
 <% if current_user.admin && logged_in %>
 <%= button_to "Edit Company", edit_company_path(@company), method: :get %>

@@ -26,7 +26,7 @@
         <td><%= button_to "Submit a review for this Company", new_company_review_path(company), :method=> :get%></td>
         <% if logged_in && current_user.admin %>
         <td><%= button_to "Delete Company", company_path(company), :method => :delete, :class => "delete", :confirm => "Are you sure?"%></td>
-        <td><%= button_to "Edit Company", company_path(company) %></td>
+        <td><%= button_to "Edit Company", company_path(company), method: :get %></td>
         <% end %>
       </tr>
     <% end %>
