@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
     if @auth
         @user = User.from_omniauth(request.env["omniauth.auth"])
         session[:user_id] = @user.id
-        @user.username = "anonymous#{User.last.id + 1}"
         flash[:notice]= "Successfully signed in"
         render 'users/show'
     else

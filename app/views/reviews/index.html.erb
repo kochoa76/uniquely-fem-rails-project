@@ -23,16 +23,14 @@
           <%= button_to "Edit Review", edit_company_review_path(@company, review), method: :get %>
           <%= button_to "Delete Review", company_review_path(@company, review), {controller: 'reviews', action: 'destroy', method: :delete, confirm: "Are you sure?"} %>
           <%= button_to "See Company", company_path(@company), :method => :get %>
-          <%= button_to "See all companies", companies_url, :method=> :get %>
             </p>
-          <% end %>
-        <% end %>
-      </ul>
-
-
-
-    <% if logged_in && @user == current_user %>
-        <p>
-          <%= link_to "My Account", user %>
-          <%= link_to "My Reviews", review_path(current_user.review) %>
       <% end %>
+    <% end %>
+  </ul>
+
+  <% if logged_in && current_user %>
+  <p>
+    <%= button_to "My Profile", user_path(current_user), method: :get %>
+    <%= button_to "Back to Companies", companies_url, method: :get %>
+  </p>
+  <% end %> 

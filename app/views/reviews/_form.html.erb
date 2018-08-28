@@ -40,3 +40,9 @@
       <br></br>
  <%= f.submit %>
 <% end %>
+
+<% if logged_in %>
+    <p>
+      <%= button_to "Back", user_path(current_user), method: :get %>
+    </p>
+  <% end %>
