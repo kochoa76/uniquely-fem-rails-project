@@ -8,7 +8,7 @@ class Review < ApplicationRecord
 
   # scope :rating_desc, -> { includes(:job_rating).order(job_rating: :desc) }
 
-  scope :avg_rated, -> {where('company_id').average(:job_rating)}
+  scope :avg_rated, -> {group(:company_id).order('avg(job_rating) desc').first}
 
 
   def company_attributes=(company_attribute)

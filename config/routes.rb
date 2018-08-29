@@ -10,7 +10,7 @@ resources :users do
     resources :reviews, only: [:show ]
   end
 
-
+get 'company_reviews/highest_rated' => "reviews#highest_rated"
 # get 'auth/:provider/callback', to: 'sessions#create'
 get 'auth/facebook/callback' => 'sessions#create'
 get '/signin' => "sessions#new"
