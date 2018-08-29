@@ -37,7 +37,9 @@ class ReviewsController < ApplicationController
         end
 
     def highest_rated
-      @review = Review.avg_rated
+      # @review = Review.avg_rated
+      @reviews = Review.all
+      
     end
 
      def edit
