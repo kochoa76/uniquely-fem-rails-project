@@ -3,7 +3,7 @@ This is a Rails-based app for women looking for more information on companies in
 
 Ruby version Ruby 2.3.3p222
 
-Deployment instructions You can install this app by running in your terminal git clone https://github.com/kochoa76/uniquely-fem-rails-project.  After cloning, change directory to uniquelyfem and run the following: 'bundle install,' run 'rails server' and then navigate to the server -https://localhost:3000.
+Deployment instructions You can install this app by running in your terminal git clone https://github.com/kochoa76/uniquely-fem-rails-project.  After cloning, change directory to uniquelyfem and run the following: 'bundle install', 'rails db:migrate', and then run 'rails server' and then navigate to the server -https://localhost:3000.
 
 Contributing Bug reports and pull requests are welcome on GitHub at https://github.com/kochoa76/uniquely-fem-rails-project. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
 
