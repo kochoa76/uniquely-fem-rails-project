@@ -12,11 +12,12 @@ resources :users do
 
 get 'company_reviews/highest_rated' => "reviews#highest_rated"
 # get 'auth/:provider/callback', to: 'sessions#create'
-get 'auth/facebook/callback' => 'sessions#create'
+
 get '/signin' => "sessions#new"
 post '/signin' => "sessions#create"
 get '/signout' => "sessions#destroy"
 post '/signout'=> "sessions#destroy"
+get 'auth/facebook/callback' => 'sessions#create'
  # delete '/logout' => 'sessions#delete'
 
 end

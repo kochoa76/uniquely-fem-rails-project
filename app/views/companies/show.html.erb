@@ -22,7 +22,7 @@
       <td><%= @company.city %></td>
       <td><%= @company.state %></td>
       <% if @company.reviews.exists? %>
-      <td><%= @company.reviews.avg_rated %></td>
+      <td><%= @company.reviews.avg_rated.job_rating %></td> 
       <% else %>
       <td> No Reviews Yet </td>
       <% end %>
@@ -33,7 +33,7 @@
 <br></br>
 <% if @company.reviews.exists? %>
 <%= button_to "See #{@company.name} reviews", company_reviews_path(@company), :method=> :get %>
-<%= button_to "See all Companies", companies_path, method: :get %> 
+<%= button_to "See all Companies", companies_path, method: :get %>
 <% end %>
 
 <% if current_user.admin && logged_in %>
