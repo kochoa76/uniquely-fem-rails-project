@@ -2,6 +2,10 @@ class ReviewsController < ApplicationController
 
   def index
     @company = Company.find(params[:company_id])
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @company}
+    end 
   end
 
   def new
@@ -39,7 +43,7 @@ class ReviewsController < ApplicationController
     def highest_rated
       # @review = Review.avg_rated
       @reviews = Review.all
-      
+
     end
 
      def edit
