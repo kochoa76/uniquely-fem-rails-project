@@ -2,6 +2,7 @@
   <h2> Top 3 Avg Rated Reviews by Company </h2>
 
       <% @reviews.top_avg_rated_reviews.each do |review| %>
+      <li><strong> Company Name: </strong> <%= review.company.name %></li>
       <li><strong>salary:</strong> <%= review.salary %></li>
       <li><strong>Are there women in leadership positions?</strong> <%= review.women_exec_roles %></li>
       <li><strong>Are there opportunities for promotion for women?</strong> <%= review.promo_opps %></li>
