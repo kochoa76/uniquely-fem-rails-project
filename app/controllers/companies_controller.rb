@@ -33,6 +33,10 @@ class CompaniesController < ApplicationController
 
   def show
      @company = Company.find(params[:id])
+     respond_to do |f|
+       f.html 
+       f.json {render json: @company}
+     end
   end
 
   def destroy
