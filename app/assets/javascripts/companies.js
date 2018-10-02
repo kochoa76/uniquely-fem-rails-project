@@ -2,19 +2,17 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 //
-// $('.grid').masonry({
-//   // options...
-//   itemSelector: '.grid-item',
-//   columnWidth: 200
-// });
 
-(() => {
-  bindClickHandlers = () => {
-    $('get_main_page').on("click", function(event) {
+
+$(() => {
+  bindClickHandlers()
+})
+
+const bindClickHandlers = () => {
+    $('.get_main_page').on('click', (event) => {
       event.preventDefault();
       fetch(`/companies.json`)
-      .then(resp => resp.json())
+      .then((res) => res.json())
       .then(data => console.log(data))
     })
   }
-})
