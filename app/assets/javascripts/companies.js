@@ -12,18 +12,9 @@ const bindClickHandlers = () => {
     $('.get_main_page').on('click', (event) => {
       event.preventDefault();
       history.pushState(null, null, "/companies")
-      fetch(`/companies.json`)
-      .then(res => res.json())
-      .then(companies => {
-        $("#app-container").html('')
-        companies.forEach(company => {
-          let newCompany = new Company(company)
-          let companyHTML = newCompany.formatIndex()
-          console.log(companyHTML)
-          $('#app-container').append(companyHTML)
-        })
+      getCompanies();
     })
-  })
+  }
 
   $(document).on('click', ".show_link", function(event){
     event.preventDefault()
@@ -31,8 +22,33 @@ const bindClickHandlers = () => {
       fetch(`/companies/${id}.json`)
       .then(res => res.json())
       .then(company => {
-        console.log(company)
+        $('#app-container').html('')
+        let newCompany = new Company(company)
+        let companyHTML = newCompany.formatShow()
+        $('#app-container').append(companyHTML)
       })
+  })
+
+
+const getCompanies = () => {
+//   fetch(`/companies.json`)
+//   .then(res => res.json())
+//   .then(companies => {
+//     $("#app-container").html('')
+//     companies.forEach(company => {
+//     let newCompany = new Company(company)
+//     let companyHTML = newCompany.formatIndex()
+//     console.log(companyHTML)
+//     $('#app-container').append(companyHTML)
+//     })
+//   })
+// }
+$.ajax({
+  method: 'get',
+  url: '/companies.json',
+  success: function(data) {
+    console.log(data)
+    }
   })
 }
 
@@ -48,6 +64,14 @@ Company.prototype.formatIndex = function() {
   console.log(this);
   let companyHTML = `
   <a href="/companies/${this.id}" data-id="${this.id}" class="show_link"><h1>${this.name}</h1></a>
+  `
+  return companyHTML
+}
+
+Company.prototype.formatShow = function() {
+  console.log(this);
+  let companyHTML = `
+  <h3>${this.name}</h3>
   `
   return companyHTML
 }
