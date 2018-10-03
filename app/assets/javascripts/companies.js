@@ -18,15 +18,17 @@ const bindClickHandlers = () => {
 
   $(document).on('click', ".show_link", function(event){
     event.preventDefault()
-      let id = ($(this).attr('data-id'))
-      fetch(`/companies/${id}.json`)
-      .then(res => res.json())
-      .then(company => {
-        $('#app-container').html('')
-        let newCompany = new Company(company)
-        let companyHTML = newCompany.formatShow()
-        $('#app-container').append(companyHTML)
-      })
+    let id = ($(this).attr('data-id'))
+    // console.log(id)
+      // fetch(`/companies/${id}.json`)
+      // .then(res => res.json())
+      // .then(company => {
+      //   $('#app-container').html('')
+      //   let newCompany = new Company(company)
+      //   let companyHTML = newCompany.formatShow()
+      //   $('#app-container').append(companyHTML)
+      // })
+      showCompanies(id);
   })
 
   $(document).on('click', '.next-post', function() {
@@ -34,6 +36,19 @@ const bindClickHandlers = () => {
     fetch(`companies/${id}/next`)
   })
 
+const showCompanies = (id) => {
+
+    $.ajax({
+      method: 'get',
+      url: `/companies/${id}.json`,
+      success: function(company) {
+      $('#app-container').html('')
+      let newCompany = new Company(company)
+      let companyHTML = newCompany.formatShow()
+      $('#app-container').append(companyHTML)
+    }
+    })
+  }
 
 const getCompanies = () => {
 //   fetch(`/companies.json`)

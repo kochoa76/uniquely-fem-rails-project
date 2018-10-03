@@ -8,7 +8,18 @@ class Company < ApplicationRecord
   #   rating_desc.first
   # end
 
-  
+  def next
+    company = Company.where("id > ?", id).first
+
+    if company
+      company
+    else
+      Company.first
+    end
+
+  end
+
+
 
 
 end

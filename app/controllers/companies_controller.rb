@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  before_action :set_company, only: [:next, :edit, :update, :show, :destroy]
   def index
     @companies = Company.all
     respond_to do |f|
@@ -19,14 +20,14 @@ class CompaniesController < ApplicationController
     end
 
   def next
-  end 
+    @next_company = @company.next
+    render json: @next_company
+  end
 
   def edit
-    @company = Company.find(params[:id])
   end
 
   def update
-   @company = Company.find(params[:id])
    if @company.update(company_params)
      redirect_to @company
    else
@@ -35,7 +36,6 @@ class CompaniesController < ApplicationController
  end
 
   def show
-     @company = Company.find(params[:id])
      respond_to do |f|
        f.html
        f.json {render json: @company}
@@ -43,12 +43,15 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
-      @company= Company.find(params[:id])
         @company.delete
         redirect_to companies_path
       end
 
   private
+
+  def set_company
+    @company = Company.find(params[:id])
+  end 
 
   def company_params
     params.require(:company).permit(
