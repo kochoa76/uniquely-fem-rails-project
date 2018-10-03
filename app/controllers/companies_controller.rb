@@ -21,7 +21,10 @@ class CompaniesController < ApplicationController
 
   def next
     @next_company = @company.next
-    render json: @next_company
+    respond_to do |f|
+      f.html {render @next_company}
+      f.json {render json: @next_company}
+    end
   end
 
   def edit
@@ -38,7 +41,7 @@ class CompaniesController < ApplicationController
   def show
      respond_to do |f|
        f.html
-       f.json {render json: @company}
+       f.json {render json: @company, include: :reviews}
      end
   end
 
@@ -51,13 +54,14 @@ class CompaniesController < ApplicationController
 
   def set_company
     @company = Company.find(params[:id])
-  end 
+  end
 
   def company_params
     params.require(:company).permit(
       :name,
       :size,
       :city,
-      :state)
+      :state,
+      :description)
   end
 end

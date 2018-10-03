@@ -17,23 +17,18 @@ const bindClickHandlers = () => {
   }
 
   $(document).on('click', ".show_link", function(event){
-    event.preventDefault()
+    event.preventDefault();
     let id = ($(this).attr('data-id'))
-    // console.log(id)
-      // fetch(`/companies/${id}.json`)
-      // .then(res => res.json())
-      // .then(company => {
-      //   $('#app-container').html('')
-      //   let newCompany = new Company(company)
-      //   let companyHTML = newCompany.formatShow()
-      //   $('#app-container').append(companyHTML)
-      // })
+    history.pushState(null, null, `/companies/${id}`)
       showCompanies(id);
   })
 
-  $(document).on('click', '.next-post', function() {
+  $(document).on('click', '.next-company', function(event) {
+    event.preventDefault();
     let id = $(this).attr('data-id')
-    fetch(`companies/${id}/next`)
+    let trueId = parseInt(id) + 1
+    history.pushState(null, null, `/companies/${trueId}`)
+    nextCompany(id);
   })
 
 const showCompanies = (id) => {
@@ -51,18 +46,7 @@ const showCompanies = (id) => {
   }
 
 const getCompanies = () => {
-//   fetch(`/companies.json`)
-//   .then(res => res.json())
-//   .then(companies => {
-//     $("#app-container").html('')
-//     companies.forEach(company => {
-//     let newCompany = new Company(company)
-//     let companyHTML = newCompany.formatIndex()
-//
-//     $('#app-container').append(companyHTML)
-//     })
-//   })
-// }
+
 $.ajax({
   method: 'get',
   url: '/companies.json',
@@ -78,6 +62,22 @@ $.ajax({
 })
 }
 
+const nextCompany = (id) => {
+
+  $.ajax({
+    method: 'get',
+    url: `/companies/${id}/next.json`,
+    success: function(company) {
+    $("#app-container").html('')
+      let newCompany = new Company(company)
+      let nextCompanyHTML = newCompany.formatNext()
+
+      $('#app-container').append(nextCompanyHTML)
+    }
+  })
+  }
+
+
 function Company(company) {
   this.id= company.id
   this.name = company.name
@@ -87,18 +87,35 @@ function Company(company) {
 }
 
 Company.prototype.formatIndex = function() {
-  console.log(this);
-  let companyHTML = `
+  let companiesHTML = `
   <a href="/companies/${this.id}" data-id="${this.id}" class="show_link"><h1>${this.name}</h1></a>
+  `
+  return companiesHTML
+}
+
+Company.prototype.formatShow = function() {
+  console.log(this)
+  let companyHTML = `
+
+  <h3>Company Name: ${this.name}</h3>
+  <h3>Number of Employees: ${this.size} </h3>
+  <h3> Location (City): ${this.city} </h3>
+  <h3> Location (State): ${this.state} </h3>
+  <h3> Reviews: ${this.reviews}</h3>
+  <a class="next-company" data-id="${this.id}" href="/companies/${this.id}/next.json">See Next Company</a>
+
   `
   return companyHTML
 }
 
-Company.prototype.formatShow = function() {
-  console.log(this);
-  let companyHTML = `
-  <h3>${this.name}</h3>
-  <button class="next-company">Next</button>
+Company.prototype.formatNext = function() {
+  let nextHTML = `
+
+  <h3>Company Name: ${this.name}</h3>
+  <h3>Number of Employees: ${this.size} </h3>
+  <h3> Location (City): ${this.city} </h3>
+  <h3> Location (State): ${this.state} </h3>
+  <a class="next-company" data-id="${this.id}" href="/companies/${this.id}/next.json">See Next Company</button>
   `
-  return companyHTML
-}
+  return nextHTML
+  }

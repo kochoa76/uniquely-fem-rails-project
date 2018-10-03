@@ -7,10 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 companies = Company.create!([
-  {name: 'Pinterest', size: 3000, city: 'San Francisco', state: 'California'},
-  {name: 'Glossier', size: 300, city: 'New York', state: 'New York'},
-  {name: 'Modern Fertility', size: 20, city: 'San Francisco', state: 'California'},
-  {name: 'Hubspot', size: 3000, city: 'Cambridge', state: 'Massachussetts'}])
+  {name: 'Pinterest', size: 3000, city: 'San Francisco', state: 'California', description: "is a free website that requires registration to use. Users can upload, save, sort, and manage images—known as pins—and other media content (e.g., videos) through collections known as pinboards."},
+  {name: 'Glossier', size: 300, city: 'New York', state: 'New York', description: "is one of the first makeup brands to be born out of social media, and it looks the part: Its modern, minimalist packaging is designed to look good in photographs. Every Glossier product arrives in a reusable, pink plastic pouch that doubles as a handy Instagram backdrop"},
+  {name: 'Modern Fertility', size: 20, city: 'San Francisco', state: 'California', description: "is a women's health company closing the fertility information gap by letting women test key fertility hormones at home."},
+  {name: 'Hubspot', size: 3000, city: 'Cambridge', state: 'Massachussetts', description: "is a developer and marketer of software products for inbound marketing and sales."}
+  ])
 
 users = User.create!([
   {username: 'ro', email: 'ro@gmail.com', password: 'ro', admin: false},

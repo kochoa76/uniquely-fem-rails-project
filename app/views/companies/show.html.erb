@@ -12,6 +12,7 @@
       <td><strong>Number of Employees </strong></td>
       <td><strong>City (hq) </strong></td>
       <td><strong>State </strong></td>
+      <td><strong>Company Description</strong></td>
       <td><strong> Average Rating by Reviews </strong></td>
       <td><strong> Number of Reviews </strong></td>
     </tr>
@@ -21,8 +22,9 @@
       <td><%= @company.size %></td>
       <td><%= @company.city %></td>
       <td><%= @company.state %></td>
+      <td><%= @company.description %></td>
       <% if @company.reviews.exists? %>
-      <td><%= @company.reviews.avg_rated.job_rating %></td> 
+      <td><%= @company.reviews.avg_rated.job_rating %></td>
       <% else %>
       <td> No Reviews Yet </td>
       <% end %>
