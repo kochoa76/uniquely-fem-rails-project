@@ -29,6 +29,11 @@ const bindClickHandlers = () => {
       })
   })
 
+  $(document).on('click', '.next-post', function() {
+    let id = $(this).attr('data-id')
+    fetch(`companies/${id}/next`)
+  })
+
 
 const getCompanies = () => {
 //   fetch(`/companies.json`)
@@ -38,7 +43,7 @@ const getCompanies = () => {
 //     companies.forEach(company => {
 //     let newCompany = new Company(company)
 //     let companyHTML = newCompany.formatIndex()
-//     console.log(companyHTML)
+//
 //     $('#app-container').append(companyHTML)
 //     })
 //   })
@@ -46,10 +51,16 @@ const getCompanies = () => {
 $.ajax({
   method: 'get',
   url: '/companies.json',
-  success: function(data) {
-    console.log(data)
-    }
-  })
+  success: function(companies) {
+    $("#app-container").html('')
+    companies.forEach(company => {
+    let newCompany = new Company(company)
+    let companyHTML = newCompany.formatIndex()
+
+      $('#app-container').append(companyHTML)
+    })
+  }
+})
 }
 
 function Company(company) {
@@ -72,6 +83,7 @@ Company.prototype.formatShow = function() {
   console.log(this);
   let companyHTML = `
   <h3>${this.name}</h3>
+  <button class="next-company">Next</button>
   `
   return companyHTML
 }
