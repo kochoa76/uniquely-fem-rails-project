@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :password, presence: true
   has_secure_password
-  before_save :set_anonymous_user
+  after_create :set_anonymous_user
 
   def self.from_omniauth(auth)
           where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -21,6 +21,7 @@ class User < ApplicationRecord
       end
 
     def set_anonymous_user
-      self.username = "anonymous#{User.last.id + 1 }"
+      self.username = "anonymous#{User.last.id + 1}"
+      save
     end
   end
