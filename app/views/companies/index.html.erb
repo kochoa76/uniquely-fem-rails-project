@@ -1,45 +1,9 @@
-<h1>List of All Companies</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <tr>
-      <td><strong>Name</strong></td>
-      <td><strong>Company Reviews</strong></td>
-      <td><strong> Company Details </strong></td>
-      <td><strong>  Submit a Review </strong></td>
-
-    </tr>
-      <% @companies.each do |company|%>
-      <tr>
-        <td><%= company.name %></td>
-        <% if company.reviews.exists? %>
-        <td><%= button_to "See #{company.name} reviews", company_reviews_path(company), :method=> :get %></td>
-        <% else %>
-        <td> No Reviews Yet </td>
-        <% end %>
-        <td><%= button_to "Company Details", company_path(company), :method=> :get %></td>
-        <td><%= button_to "Submit a review for this Company", new_company_review_path(company), :method=> :get%></td>
-        <% if logged_in && current_user.admin %>
-        <td><%= button_to "Delete Company", company_path(company), :method => :delete, :class => "delete", :confirm => "Are you sure?"%></td>
-        <td><%= button_to "Edit Company", company_path(company), method: :get %></td>
-        <% end %>
-      </tr>
+<main>
+  <article>
+    <% @companies.each do |company| %>
+    <h3><%= company.name %></h3>
+    <p><%= truncate(company.description) %></p>
     <% end %>
-  </tbody>
-</table>
-
-
-<br></br>
-    <% if logged_in && !current_user.admin %>
-        <p>
-          <%= button_to "Back to Profile", user_path(current_user), method: :get %>
-        </p>
-    <% else %>
-      <td><%= button_to "Create a Company", new_company_path, method: :get %></td>
-      
-    <% end %>
+</main>
+</article>

@@ -12,7 +12,7 @@ resources :users do
 
 get 'company_reviews/highest_rated' => "reviews#highest_rated"
 # get 'auth/:provider/callback', to: 'sessions#create'
-
+get '/index1' => "company#index"
 get '/signin' => "sessions#new"
 get '/companies/:id/next'=> "companies#next"
 post '/signin' => "sessions#create"

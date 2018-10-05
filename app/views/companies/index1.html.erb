@@ -1,0 +1,9 @@
+<h1>List of All Companies</h1>
+<main>
+  <article>
+    <% @companies.each do |company| %>
+    <h3> company.name    company.reviews.avg_rated </h3>
+    <p> company.description.truncated </p>
+    <% end %>
+</main>
+</article>

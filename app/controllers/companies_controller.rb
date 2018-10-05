@@ -4,7 +4,7 @@ class CompaniesController < ApplicationController
     @companies = Company.all
     respond_to do |f|
       f.html {render :index}
-      f.json {render json: @companies}
+      f.json {render json: @companies, include: :reviews}
     end
   end
 
