@@ -9,12 +9,18 @@ $(() => {
 })
 
 const bindClickHandlers = () => {
-    $('.get_main_page').on('click', (event) => {
+    $('.companyInfo').on('click', (event) => {
       event.preventDefault();
       history.pushState(null, null, "/companies")
-      getCompanies();
+      showCompanies();
     })
   }
+
+  $(document).on("click", ".seeMore", function(){
+    let id= ($(this).attr('data-id'))
+      seeMore(id);
+  }
+)
 
   $(document).on('click', ".show_link", function(event){
     event.preventDefault();
@@ -44,6 +50,23 @@ const showCompanies = (id) => {
     }
     })
   }
+
+  const seeMore = (id) => {
+    $.ajax({
+      method: 'get',
+      url: `/companies/${id}.json`,
+      success: function(company) {
+      $("#descrip-" +id).html('')
+          let newCompany = new Company(company)
+          let seeMoreHTML = newCompany.formatSeeMore();
+
+          $('#descrip-' + id).append(seeMoreHTML);
+        }
+      })
+    }
+
+
+
 
 const getCompanies = () => {
 
@@ -84,6 +107,7 @@ function Company(company) {
   this.size = company.size
   this.city = company.city
   this.state = company.state
+  this.description = company.description
 }
 
 Company.prototype.formatIndex = function() {
@@ -118,4 +142,12 @@ Company.prototype.formatNext = function() {
   <a class="next-company" data-id="${this.id}" href="/companies/${this.id}/next.json">See Next Company</button>
   `
   return nextHTML
+  }
+
+  Company.prototype.formatSeeMore = function() {
+    console.log(this.description)
+    let seeMoreHTML = `
+    <p> ${this.description}</p>
+   `
+   return seeMoreHTML
   }

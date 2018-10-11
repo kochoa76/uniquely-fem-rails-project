@@ -8,6 +8,8 @@ class Company < ApplicationRecord
   #   rating_desc.first
   # end
 
+  scope :avg_rated_company, -> {group(:company_id).order('avg(job_rating) desc').first}
+
   def next
     company = Company.where("id > ?", id).first
 

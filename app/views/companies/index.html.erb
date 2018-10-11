@@ -1,9 +1,14 @@
-
-<main>
-  <article>
-    <% @companies.each do |company| %>
-    <h3><%= company.name %></h3>
-    <p><%= truncate(company.description) %></p>
-    <% end %>
-</main>
-</article>
+<header>
+  <h2> List of all Companies </h2>
+  <main>
+    <article>
+      <% @companies.each do |company| %>
+      <h3><a href="/companies/<%=company.id%>"><%= company.name %></a></h3>
+      <p> Avg Rating:  Location: <%=company.city %></p>
+      <div id="descrip-<%= company.id %>"><%= truncate(company.description) %></div>
+      <button class="seeMore" data-id="<%=company.id%>"> See more.. </button><br>
+      <button class="submitReview"> Submit Review for <%=company.name %> </button>
+      <% end %>
+    </article>
+   </main>
+  <header>
