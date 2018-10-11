@@ -17,8 +17,9 @@
 
  /* CSS for main views */
 
- header {
-   text-align: center; 
+ head {
+   text-align: center;
+
  }
 
  div#login {
@@ -26,7 +27,7 @@
    margin-right: 25px;
  }
 
- .app-page {
+ /* .app-page {
    border-style: solid;
    display: block;
    margin-left: auto;
@@ -37,7 +38,7 @@
    text-align: center;
 
    padding: 20px 0px 20px 30px;
- }
+ } */
 
  .topnav {
     font-family: 'Source Serif Pro', serif;
@@ -59,10 +60,7 @@
      background-color: #E6E6FA;
      color: 	#4B0082;
      display: block;
-     margin-left: 100px;
-     margin-right: 190px;
-     margin-bottom: 100px;
-     margin-top: 170px;
+     margin: auto;
      font-size: 17px;
      list-style-type: none;
    }

@@ -1,14 +1,16 @@
+<body>
 <header>
   <h2> List of all Companies </h2>
+</header>
   <main>
-    <article>
-      <% @companies.each do |company| %>
+    <% @companies.each do |company| %>
+      <article>
       <h3><a href="/companies/<%=company.id%>"><%= company.name %></a></h3>
       <p> Avg Rating:  Location: <%=company.city %></p>
-      <div id="descrip-<%= company.id %>"><%= truncate(company.description) %></div>
-      <button class="seeMore" data-id="<%=company.id%>"> See more.. </button><br>
-      <button class="submitReview"> Submit Review for <%=company.name %> </button>
-      <% end %>
+      <div id="descrip-<%= company.id %>"><%= truncate(company.description) %></div><br>
+      <button class="seeMore" data-id="<%=company.id%>"> Show more.. </button><br>
+      <input type="button" onclick="location.href='/companies/<%=company.id%>/reviews'" value="See <%=company.name %> Reviews"></input>
     </article>
+      <% end %>
    </main>
-  <header>
+ </body>

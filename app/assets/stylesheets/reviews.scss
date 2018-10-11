@@ -1,3 +1,27 @@
 // Place all the styles related to the Reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+ul{
+  border: 1px solid #999;
+  border-radius: 5px;
+  background: #fff;
+  margin: auto;
+  padding-bottom: 30px;
+  text-align: left;
+}
+
+button {
+  font-family: serif; 
+  font-size: 17px;
+  color: #4B0082;
+  border-color: #4B0082;
+  border-radius: 5px;
+}
+
+header {
+  margin: 45px 0px;
+  font-size: 100%;
+}

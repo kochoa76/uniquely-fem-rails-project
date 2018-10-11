@@ -7,28 +7,38 @@
 }
 
 header {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
+  margin: auto;
 }
 
 body {
 	font-size: 80%;
 	line-height: 1.2;
-  margin: 1.5em auto;
-    max-width: 768px;
-    column-gap: 1.5em;
+  margin: 4em;
+  max-width: 768px;
+  column-gap: 1.5em;
+
+}
+
+img {
+  width: 100%;
+  display: block;
 }
 
 article {
-	break-inside: avoid-column;
-  display: inline-block;
-  padding: 1em;
-  margin: 0 0 1.5em;
-    width: 100%;
+  padding: 20px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    background: #fff;
+    margin: 10px;
+    break-inside: avoid-column;
+
 }
 
 main {
+  
 	columns: 250px;
 	column-gap: 20px;
+
+
+
 }

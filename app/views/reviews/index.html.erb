@@ -1,4 +1,7 @@
-<h2>All Reviews for <%=@company.name%> </h2>
+<header>
+  <h2>Reviews for <%=@company.name%> </h2>
+</header>
+
 <table class="table">
   <thead>
     <tr>
@@ -8,16 +11,16 @@
 
 <ul>
   <% @company.reviews.each do |review| %>
-    <p><%= review.user.username %> says:</p>
-    <li><strong>salary:</strong> <%= review.salary %></li>
-    <li><strong>Are there women in leadership positions?</strong> <%= review.women_exec_roles %></li>
-    <li><strong>Are there opportunities for promotion for women?</strong> <%= review.promo_opps %></li>
-    <li><strong>Would you recommend this company to a female friend? </strong><%= review.recommend %></li>
-    <li><strong>What is your overall job satisfaction rating?(1-5) </strong><%= review.job_rating %></li>
-    <li><strong>Date Review Posted </strong></li><%= review.created_at.strftime('%m-%d-%Y')%></li>
-    <li><strong>Any other details about the company
-      (i.e. Maternity leave, remote work flexibility, company wide training etc.)</strong></li>
-      <%=review.content%></p>
+    <p><strong><%= review.user.username %></strong> says:</p>
+    <li><strong>salary:</strong><br><%= review.salary %></li></br>
+    <li><strong>Women in leadership positions?</strong><br> <%= review.women_exec_roles %></li></br>
+    <li><strong>Opportunities for promotion?</strong><br><%= review.promo_opps %></li></br>
+    <li><strong>Would you recommend a friend? </strong><br><%= review.recommend %></li></br>
+    <li><strong>Overall job satisfaction rating?(1-5) </strong><br><%= review.job_rating %></li></br>
+    <li><strong>Date Review Posted </strong><br><%= review.created_at.strftime('%m-%d-%Y')%></li></br>
+    <li><strong>Other details (i.e. Maternity leave, remote work, training etc.)</strong></li>
+      <%=review.content%></p></br>
+    <button class="js-nextReview"><strong> See Next Review.. </strong></button>
       <% if logged_in && review.user_id == current_user.id %>
         <p>
           <%= button_to "Edit Review", edit_company_review_path(@company, review), method: :get %>
@@ -30,7 +33,8 @@
 
   <% if logged_in && current_user %>
   <p>
+    <br>
     <%= button_to "My Profile", user_path(current_user), method: :get %>
     <%= button_to "Back to Companies", companies_url, method: :get %>
   </p>
-  <% end %> 
+  <% end %>
