@@ -4,8 +4,8 @@ class ReviewsController < ApplicationController
     @company = Company.find(params[:company_id])
     respond_to do |f|
       f.html {render :index}
-      f.json {render json: @company}
-    end 
+      f.json {render json: @company, include: :reviews}
+    end
   end
 
   def new

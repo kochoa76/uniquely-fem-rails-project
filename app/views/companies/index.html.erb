@@ -9,7 +9,7 @@
       <p> Avg Rating:  Location: <%=company.city %></p>
       <div id="descrip-<%= company.id %>"><%= truncate(company.description) %></div><br>
       <button class="seeMore" data-id="<%=company.id%>"> Show more.. </button><br>
-      <input type="button" onclick="location.href='/companies/<%=company.id%>/reviews'" value="See <%=company.name %> Reviews"></input>
+      <input type="button" class="buttonType" onclick="location.href='/companies/<%=company.id%>/reviews'" value="See <%=company.name %> Reviews"></input>
     </article>
       <% end %>
    </main>
