@@ -18,7 +18,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-
   def create
       if !params[:company_id]
           @review = Review.create(reviews_params)
@@ -37,6 +36,15 @@ class ReviewsController < ApplicationController
             else
                redirect_to new_company_review_path, :notice => "boxes can't be blank"
             end
+          end
+        end
+
+        def next_review
+          @review = Review.find(params[:id])
+          @next_review = @review.next_review
+          respond_to do |f|
+            f.html {render @next_review}
+            f.json {render json: @next_review, include: :user }
           end
         end
 

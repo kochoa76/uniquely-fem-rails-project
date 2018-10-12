@@ -16,5 +16,17 @@ class Review < ApplicationRecord
       self.company = Company.find_or_create_by(company_attribute)
   end
 
+  def next_review
+    next_review = Review.where("id > ?", id).first
+
+    if next_review
+      next_review
+    else
+      Review.first
+    end
+  end
+
+  
+
 
 end

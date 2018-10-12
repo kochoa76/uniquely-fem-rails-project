@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:next, :edit, :update, :show, :destroy]
+  before_action :set_company, only: [:next, :edit, :update, :show, :destroy, :next_review]
   def index
     @companies = Company.all
     respond_to do |f|
@@ -26,6 +26,8 @@ class CompaniesController < ApplicationController
       f.json {render json: @next_company}
     end
   end
+
+  
 
   def edit
   end
