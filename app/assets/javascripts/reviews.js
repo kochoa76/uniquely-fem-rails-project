@@ -10,7 +10,23 @@ const reviewClickHandlers = () => {
     let companyId = $('.companyReviews').attr("data-id")
     // let trueId = parseInt(reviewId) + 1
     // history.pushState(null, null, `companies/${companyId}/reviews/${reviewId}`)
-    seeNextReview(companyId, reviewId); })
+    companyName(companyId);
+    seeNextReview(companyId, reviewId);
+  })
+}
+
+const companyName = (companyId) => {
+  $.ajax({
+    method: 'get',
+    url: `/companies/${companyId}.json`,
+    success: function(company){
+      $('#app-container').html('')
+      let newCompany = new Company(company)
+      let seeCompanyNameHTML = newCompany.formatCompanyName();
+      $("#app-container").append(seeCompanyNameHTML)
+    }
+
+  })
 }
 
 
@@ -19,17 +35,15 @@ const seeNextReview = (companyId, reviewId) => {
     method: 'get',
     url: `/companies/${companyId}/next_review.json`,
     success: function(review) {
-
-    $('#app-container').html('')
-
         let newReview = new Review(review)
-        console.log(newReview)
+        console.log(review)
         let nextReviewHTML = newReview.formatNextReview();
-
         $("#app-container").append(nextReviewHTML)
+
       }
     })
 }
+
 
 
 
@@ -46,13 +60,20 @@ function Review(review, user) {
   this.recommend = review.recommend
   this.username = review.user.username
 
+
 }
+
+Company.prototype.formatCompanyName = function() {
+  seeCompanyNameHTML = `
+    <h2><strong> Reviews for ${this.name}</strong></h2>
+    `
+    return seeCompanyNameHTML
+  }
 
 Review.prototype.formatNextReview = function() {
 let companyId = $('.companyReviews').attr("data-id")
 
   seeNextReviewHTML = `
-  <h2><strong>${this.company_id}</strong></h2><br>
   <p><strong>${this.username}</strong> says:</p>
   <li><strong>salary:</strong><br>${this.salary}</li></br>
   <li><strong>Women in leadership positions?</strong><br>${this.women_exec_roles}</li></br>
@@ -62,7 +83,7 @@ let companyId = $('.companyReviews').attr("data-id")
   <li><strong>Date Review Posted </strong><br>${this.created_at}.strftime('%m-%d-%Y')</li></br>
   <li><strong>Other details (i.e. Maternity leave, remote work, training etc.)</strong></li>
     ${this.content}</p></br>
-  <a class="nextReview" href="/companies/${companyId}/next_review.json" data-id="${this.id}"><strong> See Next Review.. </strong></button>
+  <a class="nextReview" href="/companies/${this.company_id}/next_review.json" data-id="${this.id}"><strong> See Next Review.. </strong></button>
   `
   return seeNextReviewHTML
 }

@@ -10,23 +10,23 @@ class Review < ApplicationRecord
 
   scope :avg_rated, -> {group(:company_id).order('avg(job_rating) desc').first}
   scope :avg_review, -> {group(:company_id).order('avg(job_rating) desc').first}
-
+  scope :next_review, -> {group(:company_id).where('id > ?', id).first}
 
   def company_attributes=(company_attribute)
       self.company = Company.find_or_create_by(company_attribute)
   end
 
-  def next_review
-    next_review = Review.where("id > ?", id).first
+  # def next_review
+  #   next_review = Review.where("id > ?", id).first
+  #
+  #   if next_review
+  #     next_review
+  #   else
+  #     Review.first
+  #   end
+  # end
 
-    if next_review
-      next_review
-    else
-      Review.first
-    end
-  end
 
-  
 
 
 end

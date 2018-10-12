@@ -44,7 +44,18 @@ class ReviewsController < ApplicationController
           @next_review = @review.next_review
           respond_to do |f|
             f.html {render @next_review}
-            f.json {render json: @next_review, include: :user }
+            f.json {render json: @next_review.to_json(
+              { :include => [
+                  user: {
+                    only: [:username]
+                  },
+                  company: {
+                   only: [:name]
+                  }
+                ]
+              }
+            )
+          }
           end
         end
 
