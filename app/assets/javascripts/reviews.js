@@ -15,12 +15,12 @@ const reviewClickHandlers = () => {
   })
 }
 
-$(document).on("click", ".next-review", function() {
-  let reviewId = $(this).attr('data-id')
-  let companyId = $('.companyReviews').attr("data-id")
-  companyName(companyId);
-  seeNextReview(companyId, reviewId)
-})
+// $(document).on("click", ".next-review", function() {
+//   let reviewId = $(this).attr('data-id')
+//   let companyId = $('.companyReviews').attr("data-id")
+//   companyName(companyId);
+//   seeNextReview(companyId, reviewId)
+// })
 
 const companyName = (companyId) => {
   $.ajax({
@@ -52,14 +52,14 @@ const companyName = (companyId) => {
 const seeNextReview = (companyId, reviewId) => {
   $.ajax({
     method: 'get',
-    url: `/companies/${companyId}/next_review.json`,
+    url: `/companies/${companyId}/reviews/${reviewId}/next_review.json`,
     success: function(review) {
 
         let newReview = new Review(review)
         let nextReviewHTML = newReview.formatNextReview();
         $("#app-container").append(nextReviewHTML)
         $("#app-container").css({"border": "1px solid #999", "background": "#fff", "border-radius": "5px", "padding-top": "15px", "padding-bottom": "25px", "padding-left": "25px", "padding-right": "25px", "text-align": "left", "margin": "60px"});
-        $(".js-nextReview").css({"border": "1px solid", "color": "#4B0082", "border-color": "#4B0082", "font-size": "16px", "border-radius": "5px", "font-family": "serif"})
+        $(".js-nextReview").css({"border": "1px solid #999", "color": "#4B0082", "border-color": "#4B0082", "font-size": "16px", "padding": "3px", "border-radius": "5px", "font-family": "serif"})
       }
     })
 }
@@ -87,21 +87,6 @@ Company.prototype.formatCompanyName = function() {
     return seeCompanyNameHTML
   }
 
-// Company.prototype.formatShow = function() {
-//   showReviewHTML = `
-//   <p><strong>${this.username}</strong> says:</p>
-//   <li><strong>salary:</strong><br>${this.salary}</li></br>
-//   <li><strong>Women in leadership positions?</strong><br>${this.women_exec_roles}</li></br>
-//   <li><strong>Opportunities for promotion?</strong><br>${this.promo_opps}</li></br>
-//   <li><strong>Would you recommend a friend? </strong><br>${this.recommend}</li></br>
-//   <li><strong>Overall job satisfaction rating?(1-5) </strong><br>${this.job_rating}</li></br>
-//   <li><strong>Other details (i.e. Maternity leave, remote work, training etc.)</strong></li>
-//     ${this.content}</p><br>
-//   <a class="js-nextReview" data-id="${this.id}" href="/companies/${this.company_id}/next_review.json">See Next Review></a><br></br>
-//   `
-//   return showReviewHTML
-// }
-
 Review.prototype.formatNextReview = function() {
   console.log(this)
 let companyId = $('.companyReviews').attr("data-id")
@@ -115,7 +100,8 @@ let companyId = $('.companyReviews').attr("data-id")
   <li><strong>Overall job satisfaction rating?(1-5) </strong><br>${this.job_rating}</li></br>
   <li><strong>Other details (i.e. Maternity leave, remote work, training etc.)</strong></li>
     ${this.content}</p><br>
-  <a class="js-nextReview" data-id="${this.id}" href="/companies/${this.company_id}/next_review.json">See Next Review></a><br></br>
+  <a class="companyReviews" data-id="${this.company_id}">
+  <a class="js-nextReview" data-id="${this.id}"><strong>See Next Review..</strong></a><br></br>
 
   `
   return seeNextReviewHTML

@@ -21,7 +21,7 @@ class Review < ApplicationRecord
     if next_review
       next_review
     else
-      Review.first
+      Review.where(company_id: company).first
     end
   end
 
