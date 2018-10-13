@@ -9,10 +9,13 @@ $(() => {
 })
 
 const bindClickHandlers = () => {
-    $('.companyInfo').on('click', (event) => {
+    $('.companyInfo').on('click', function(event) {
       event.preventDefault();
-      history.pushState(null, null, "/companies")
-      showCompanies();
+      console.log(this)
+      let id = ($(this).attr('data-id'))
+      console.log(id)
+      // history.pushState(null, null, "/companies")
+      showCompanies(id);
     })
   }
 

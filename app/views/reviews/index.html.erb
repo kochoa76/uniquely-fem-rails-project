@@ -1,6 +1,4 @@
-<header>
-  <h2 class="companyHeader">Reviews for <%=@company.name%> </h2>
-</header>
+
 
 <table class="table">
   <thead>
@@ -11,7 +9,7 @@
 
 <ul>
   <div class="companyReviews" data-id="<%=@company.id%>">
-
+      <h2 class="companyHeader">Reviews for <%=@company.name%> </h2>
       <p><strong><%= @company.reviews.first.user.username %></strong> says:</p>
       <li><strong>salary:</strong><br><%= @company.reviews.first.salary %></li></br>
       <li><strong>Women in leadership positions?</strong><br> <%=@company.reviews.first.women_exec_roles %></li></br>
@@ -28,8 +26,8 @@
 
   <% if logged_in && @company.reviews.first.user_id == current_user.id %>
     <p>
-      <%= button_to "Edit Review", edit_company_review_path(@company, review), method: :get %>
-      <%= button_to "Delete Review", company_review_path(@company, review), {controller: 'reviews', action: 'destroy', method: :delete, confirm: "Are you sure?"} %>
+      <%= button_to "Edit Review", edit_company_review_path(@company, @company.reviews.first), method: :get %>
+      <%= button_to "Delete Review", company_review_path(@company, @company.reviews.first), {controller: 'reviews', action: 'destroy', method: :delete, confirm: "Are you sure?"} %>
       <%= button_to "See Company", company_path(@company), :method => :get %>
     </p>
   <% end %>

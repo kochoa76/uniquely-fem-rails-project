@@ -5,7 +5,7 @@
   <main>
     <% @companies.each do |company| %>
       <article>
-      <h3><a href="/companies/<%=company.id%>"><%= company.name %></a></h3>
+      <h3><a class="companyInfo" data-id="<%=company.id%>" href="/companies/<%=company.id%>"><%= company.name %></a></h3>
       <p> Avg Rating:  Location: <%=company.city %></p>
       <div id="descrip-<%= company.id %>"><%= truncate(company.description) %></div><br>
       <button class="seeMore" data-id="<%=company.id%>"> Show more.. </button><br>
