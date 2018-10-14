@@ -4,6 +4,10 @@ $(() => {
   reviewClickHandlers()
 })
 
+$(() => {
+  attachListener();
+})
+
 const reviewClickHandlers = () => {
   $(document).on("click", ".js-nextReview", function() {
     let reviewId = $(this).attr('data-id')
@@ -13,22 +17,25 @@ const reviewClickHandlers = () => {
   })
 }
 
-// $(document).on("click", ".form", function(){
-//   $('form').submit(function(event) {
-//     companyId = $('.form').attr('data-id')
+// var attachListener = function() {
+// $(document).on("submit", "form#new_review", function(event){
+//
 //     event.preventDefault();
+//     action = $(this).attr("action");
 //     values = $(this).serialize()
-//     posting = $.post(`/companies/${companyId}/reviews.json`, values)
+//     posting = $.post(action, values)
 //     posting.done(function(data) {
-//       $('#reviewResult').text(data)
+//       // $('#reviewResult').text(data)
+//       alert(data)
 //       })
 //     })
-//   })
+//   }
 
 
-  $(document).on('submit', 'form#new_review', function(event){
+var attachListener = function() {
+  $(document).on('submit', 'form.new_review', function(event){
     event.preventDefault();
-    console.log(this)
+
     let $form = $(this);
     let action = $form.attr("action");
     let params = $form.serialize();
@@ -40,10 +47,15 @@ const reviewClickHandlers = () => {
     dataType: "json",
     type: "POST",
     success: function(data) {
-      $('div#reviewResult').append(data)
-    }
+      console.log(data)
+    },
+    error: function(data){
+        alert("fail");
+      }
+      // $('div#reviewResult').append(data)
   })
 })
+}
 
 const companyName = (companyId) => {
   $.ajax({

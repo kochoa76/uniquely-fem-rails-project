@@ -1,15 +1,16 @@
 
 <!DOCTYPE html>
 <html>
-<body class="app-page">
-Welcome to UniquelyFem, an app that alleviates obstacles unique to women in the job search.
-<br></br>
-<br></br>
-<div id="login">
-  <%= link_to('Log in with Facebook!', '/auth/facebook') %>
-  <br></br>
- <%= link_to "Log In", signin_path %><br></br>
- <%= link_to "Sign Up", new_user_path %>
+<body>
+<div class="app-page">
+  Welcome to UniquelyFem, an app for women to share experiences in the workplace
+  <br><br></br>
+  <div id="login">
+    <%= button_to 'Log in with Facebook', '/auth/facebook', class: "buttonTo" %>
+    <br>
+   <%= button_to "Log In", signin_path, class: "buttonTo" %><br>
+   <%= button_to "Sign Up", new_user_path, class: "buttonTo"%>
+  </div>
 </div>
 </body>
 </html>

@@ -4,20 +4,20 @@
 //
 
 
-$(() => {
-  bindClickHandlers()
-})
-
-const bindClickHandlers = () => {
-    $('.companyInfo').on('click', function(event) {
-      event.preventDefault();
-      console.log(this)
-      let id = ($(this).attr('data-id'))
-      console.log(id)
-      // history.pushState(null, null, "/companies")
-      showCompanies(id);
-    })
-  }
+// $(() => {
+//   bindClickHandlers()
+// })
+//
+// const bindClickHandlers = () => {
+//     $('.companyInfo').on('click', function(event) {
+//       event.preventDefault();
+//       console.log(this)
+//       let id = ($(this).attr('data-id'))
+//       console.log(id)
+//       // history.pushState(null, null, "/companies")
+//       showCompanies(id);
+//     })
+//   }
 
   $(document).on("click", ".seeMore", function(){
     let id= ($(this).attr('data-id'))
@@ -25,34 +25,34 @@ const bindClickHandlers = () => {
   }
 )
 
-  $(document).on('click', ".show_link", function(event){
-    event.preventDefault();
-    let id = ($(this).attr('data-id'))
-    history.pushState(null, null, `/companies/${id}`)
-      showCompanies(id);
-  })
-
-  $(document).on('click', '.next-company', function(event) {
-    event.preventDefault();
-    let id = $(this).attr('data-id')
-    let trueId = parseInt(id) + 1
-    history.pushState(null, null, `/companies/${trueId}`)
-    nextCompany(id);
-  })
-
-const showCompanies = (id) => {
-
-    $.ajax({
-      method: 'get',
-      url: `/companies/${id}.json`,
-      success: function(company) {
-      $('#app-container').html('')
-      let newCompany = new Company(company)
-      let companyHTML = newCompany.formatShow()
-      $('#app-container').append(companyHTML)
-    }
-    })
-  }
+//   $(document).on('click', ".show_link", function(event){
+//     event.preventDefault();
+//     let id = ($(this).attr('data-id'))
+//     history.pushState(null, null, `/companies/${id}`)
+//       showCompanies(id);
+//   })
+//
+//   $(document).on('click', '.next-company', function(event) {
+//     event.preventDefault();
+//     let id = $(this).attr('data-id')
+//     let trueId = parseInt(id) + 1
+//     history.pushState(null, null, `/companies/${trueId}`)
+//     nextCompany(id);
+//   })
+//
+// const showCompanies = (id) => {
+//
+//     $.ajax({
+//       method: 'get',
+//       url: `/companies/${id}.json`,
+//       success: function(company) {
+//       $('#app-container').html('')
+//       let newCompany = new Company(company)
+//       let companyHTML = newCompany.formatShow()
+//       $('#app-container').append(companyHTML)
+//     }
+//     })
+//   }
 
   const seeMore = (id) => {
     $.ajax({
@@ -71,37 +71,37 @@ const showCompanies = (id) => {
 
 
 
-const getCompanies = () => {
-
-$.ajax({
-  method: 'get',
-  url: '/companies.json',
-  success: function(companies) {
-    $("#app-container").html('')
-    companies.forEach(company => {
-    let newCompany = new Company(company)
-    let companyHTML = newCompany.formatIndex()
-
-      $('#app-container').append(companyHTML)
-    })
-  }
-})
-}
-
-const nextCompany = (id) => {
-
-  $.ajax({
-    method: 'get',
-    url: `/companies/${id}/next.json`,
-    success: function(company) {
-    $("#app-container").html('')
-      let newCompany = new Company(company)
-      let nextCompanyHTML = newCompany.formatNext()
-
-      $('#app-container').append(nextCompanyHTML)
-    }
-  })
-  }
+// const getCompanies = () => {
+//
+// $.ajax({
+//   method: 'get',
+//   url: '/companies.json',
+//   success: function(companies) {
+//     $("#app-container").html('')
+//     companies.forEach(company => {
+//     let newCompany = new Company(company)
+//     let companyHTML = newCompany.formatIndex()
+//
+//       $('#app-container').append(companyHTML)
+//     })
+//   }
+// })
+// }
+//
+// const nextCompany = (id) => {
+//
+//   $.ajax({
+//     method: 'get',
+//     url: `/companies/${id}/next.json`,
+//     success: function(company) {
+//     $("#app-container").html('')
+//       let newCompany = new Company(company)
+//       let nextCompanyHTML = newCompany.formatNext()
+//
+//       $('#app-container').append(nextCompanyHTML)
+//     }
+//   })
+//   }
 
 
 function Company(company) {
@@ -113,39 +113,39 @@ function Company(company) {
   this.description = company.description
 }
 
-Company.prototype.formatIndex = function() {
-  let companiesHTML = `
-  <a href="/companies/${this.id}" data-id="${this.id}" class="show_link"><h1>${this.name}</h1></a>
-  `
-  return companiesHTML
-}
-
-Company.prototype.formatShow = function() {
-  console.log(this)
-  let companyHTML = `
-
-  <h3>Company Name: ${this.name}</h3>
-  <h3>Number of Employees: ${this.size} </h3>
-  <h3> Location (City): ${this.city} </h3>
-  <h3> Location (State): ${this.state} </h3>
-  <h3> Reviews: ${this.reviews}</h3>
-  <a class="next-company" data-id="${this.id}" href="/companies/${this.id}/next.json">See Next Company</a>
-
-  `
-  return companyHTML
-}
-
-Company.prototype.formatNext = function() {
-  let nextHTML = `
-
-  <h3>Company Name: ${this.name}</h3>
-  <h3>Number of Employees: ${this.size} </h3>
-  <h3> Location (City): ${this.city} </h3>
-  <h3> Location (State): ${this.state} </h3>
-  <a class="next-company" data-id="${this.id}" href="/companies/${this.id}/next.json">See Next Company</button>
-  `
-  return nextHTML
-  }
+// Company.prototype.formatIndex = function() {
+//   let companiesHTML = `
+//   <a href="/companies/${this.id}" data-id="${this.id}" class="show_link"><h1>${this.name}</h1></a>
+//   `
+//   return companiesHTML
+// }
+//
+// Company.prototype.formatShow = function() {
+//   console.log(this)
+//   let companyHTML = `
+//
+//   <h3>Company Name: ${this.name}</h3>
+//   <h3>Number of Employees: ${this.size} </h3>
+//   <h3> Location (City): ${this.city} </h3>
+//   <h3> Location (State): ${this.state} </h3>
+//   <h3> Reviews: ${this.reviews}</h3>
+//   <a class="next-company" data-id="${this.id}" href="/companies/${this.id}/next.json">See Next Company</a>
+//
+//   `
+//   return companyHTML
+// }
+//
+// Company.prototype.formatNext = function() {
+//   let nextHTML = `
+//
+//   <h3>Company Name: ${this.name}</h3>
+//   <h3>Number of Employees: ${this.size} </h3>
+//   <h3> Location (City): ${this.city} </h3>
+//   <h3> Location (State): ${this.state} </h3>
+//   <a class="next-company" data-id="${this.id}" href="/companies/${this.id}/next.json">See Next Company</button>
+//   `
+//   return nextHTML
+//   }
 
   Company.prototype.formatSeeMore = function() {
     console.log(this.description)

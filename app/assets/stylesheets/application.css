@@ -27,18 +27,19 @@
    margin-right: 25px;
  }
 
- /* .app-page {
-   border-style: solid;
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
-   border-radius: 25px;
-   width: 50%;
+ .app-page {
+   font-family: serif;
+   background: #fff;
+   margin: 100px auto;
+   padding: 20px;
+   width: 80%;
+   font-size: 20px;
+   color: #4B0082;
+   border-color: #4B0082;
+   border-radius: 5px;
+   border: 2px solid #4B0082;
 
-   text-align: center;
-
-   padding: 20px 0px 20px 30px;
- } */
+ }
 
  .topnav {
     font-family: 'Source Serif Pro', serif;

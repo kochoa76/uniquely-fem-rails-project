@@ -21,7 +21,15 @@ button {
   border-radius: 5px;
 }
 
-form {
+.navbuttonTo {
+  font-family: serif;
+  font-size: 20px;
+  color: #4B0082;
+  border-color: #4B0082;
+  border-radius: 5px;
+}
+
+.form {
   border: 1px solid #999;
   border-radius: 5px;
   background: #fff;
@@ -29,6 +37,58 @@ form {
   padding: 20px;
   text-align: left;
 }
+
+div.user-icons {
+  font-family: serif;
+  background: #fff;
+  margin: auto;
+  width: 45%;
+  padding: 40px;
+  font-size: 16px;
+  color: #4B0082;
+  border-color: #4B0082;
+  border-radius: 5px;
+  border: 2px solid #4B0082;
+}
+
+.buttonTo {
+  font-family: serif;
+  font-size: 17px;
+  margin: 3px;
+  color: #4B0082;
+  border-color: #4B0082;
+  border-radius: 5px;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+div.user-reviews {
+  font-family: serif;
+  background: #fff;
+  margin: auto;
+  width: 90%;
+  font-size: 17px;
+  color: #4B0082;
+  border-color: #4B0082;
+  border-radius: 5px;
+  border: 2px solid #4B0082;
+}
+
+div.edit-user-info {
+  font-family: serif;
+  background: #fff;
+  margin: auto;
+  padding: 20px;
+  width: 35%;
+  font-size: 17px;
+  color: #4B0082;
+  border-color: #4B0082;
+  border-radius: 5px;
+  border: 2px solid #4B0082;
+}
+
 
 
 

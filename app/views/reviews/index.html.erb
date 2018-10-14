@@ -34,9 +34,7 @@
 
 
   <% if logged_in && current_user %>
-  <p>
-    <br>
-    <%= button_to "My Profile", user_path(current_user), method: :get %>
-    <%= button_to "Back to Companies", companies_url, method: :get %>
-  </p>
+    <%= button_to "My Profile", user_path(current_user), method: :get, class: "buttonTo" %>
+    
+    <%= button_to "Back to Companies", companies_url, method: :get, class: "buttonTo" %>
   <% end %>

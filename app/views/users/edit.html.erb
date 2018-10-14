@@ -1,5 +1,6 @@
-<h1>Edit your info: </h1>
+<h2>Edit your info: </h2>
 
+<div class="edit-user-info">
 <%= form_for @user do |f| %>
     <%= f.label :password, "Password:" %>
     <br>
@@ -19,6 +20,7 @@
     <%= f.submit "Update" %>
 
 <% end %>
-<br></br>
+</div>
 
-<%= link_to 'Back to My Profile', @user %>
+<br>
+<%= button_to 'Back to My Profile', @user, method: :get, class: "buttonTo"%>

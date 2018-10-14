@@ -21,7 +21,6 @@ class ReviewsController < ApplicationController
   def create
       if !params[:company_id]
           @review = Review.create(reviews_params)
-          render json: @review, status: 201
           @review.user_id = current_user.id
             if @review.save
               redirect_to company_reviews_path(@review.company), :notice => "Thank you for submitting your review"
@@ -31,7 +30,6 @@ class ReviewsController < ApplicationController
       else
           @company = Company.find(params[:company_id])
           @review = @company.reviews.create(reviews_params)
-          render json: @review, status: 201
           @review.user_id = current_user.id
             if @review.save
                redirect_to company_reviews_path(@review.company), :notice => "Thank you for submitting your review"
@@ -90,6 +88,11 @@ class ReviewsController < ApplicationController
               redirect_to company_reviews_path(@company)
             end
           end
+
+    def users_reviews
+      @user = User.find_by_id(session[:user_id])
+    end
+
 
 
   private

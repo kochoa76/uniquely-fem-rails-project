@@ -1,5 +1,6 @@
-<h1><%= @user.username %>'s profile </h1>
 
+<h1><%= @user.username %>'s profile </h1>
+<div class="user-icons">
 <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>
   <% end %>
@@ -7,31 +8,36 @@
 <% if current_user.admin  %>
 <h3>ADMIN</h3>
     <p>
-    <%= button_to "Edit #{current_user.username}", edit_user_path(@user), method: :get, :class => "buttonTo" %>
-    <br>
-    <%= form_tag user_path(@user.id), method: "delete" , :class => "buttonTo" do %>
-        <%= button_tag "Delete #{@user.username}" %>
+    <%= link_to 'Main Page', companies_path, method: :get, :class => "navbuttonTo"  %>
+    <br></br>
+    <%= link_to 'See my reviews', user_review_path, method: :get , :class => "navbuttonTo"%>
+    <br></br>
+    <%= link_to "Edit Account", edit_user_path(@user), method: :get, :class => "navbuttonTo" %>
+    <br></br>
+    <%= form_tag user_path(@user.id), method: "delete" , :class => "navbuttonTo" do %>
+        <%= link_to "Delete Account" %>
         <% end %>
-    <br>
-    <%= button_to 'Main Page', companies_path, method: :get, :class => "buttonTo"  %>
-    <br>
-    <%= button_to 'Log Out', signout_path, method: :get, :class => "buttonTo" %>
-    <br>
+    <br></br>
+    <%= link_to 'Log Out', signout_path, method: :get, :class => "navbuttonTo" %>
+    <br></br>
     </p>
   <% end %>
   <% if !current_user.admin && logged_in %>
     <p>
-    <%= button_to "Edit #{current_user.username}", edit_user_path(@user), method: :get , :class => "buttonTo"%>
-    <br>
-    <%= form_tag user_path(@user.id), method: "delete" do %>
-        <%= button_tag "Delete #{@user.username}", :class => "buttonTo" %>
+    <%= link_to 'Main Page', companies_path, method: :get, :class => "navbuttonTo" %>
+    <br><br></br>
+    <%= link_to 'Submit a Review', new_review_path, method: :get , :class => "navbuttonTo"%>
+    <br><br></br>
+    <%= link_to 'See My Reviews', "/users/#{@user.id}/reviews", method: :get, :class => "navbuttonTo"%>
+    <br><br></br>
+    <%= link_to "Edit Account", edit_user_path(@user), method: :get , :class => "navbuttonTo"%>
+    <br></br>
+    <%= form_tag user_path(@user.id), method: "delete", :class => "navbuttonTo" do %>
+        <%= link_to "Delete Account" %>
         <% end %>
-    <br>
-    <%= button_to 'Main Page', companies_path, method: :get, :class => "get_main_page" %>
-    <br>
-    <%= button_to 'Create a new Review', new_review_path, method: :get , :class => "buttonTo"%>
-    <br>
-    <%= button_to 'Log Out', signout_path, method: :get, :class => "buttonTo"%>
+    <br><br>
+    <%= link_to 'Log Out', signout_path, method: :get, :class => "navbuttonTo"%>
     <br></br>
     </p>
   <% end %>
+</div>

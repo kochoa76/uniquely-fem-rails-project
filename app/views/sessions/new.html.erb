@@ -1,13 +1,15 @@
-<h1>Log In</h1>
-<%= link_to('Log in with Facebook!', '/auth/facebook') %>
-<br></br>
-<%= link_to "Sign Up", new_user_path %>
-<br></br>
+
+<div class="user-login">
+<%= button_to 'Log in with Facebook', '/auth/facebook',  :class => "buttonTo" %><br>
+<%= button_to "Sign Up", new_user_path, method: :get, :class => "buttonTo" %>
+</span>
+<p> or.. </p>
+<br>
+
 
 <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>
   <% end %>
-<br>
 <%=form_tag({url: '/signin', method: :post}) do %>
     <%= label_tag :username %>
     <%= text_field_tag :username, nil, :required => true %>
@@ -18,8 +20,9 @@
     <%= label_tag :password %>
     <%= password_field_tag :password, nil, :required => true  %>
     <br></br>
-    <%= submit_tag "Log In" %>
+    <%= submit_tag "Log In", :class => "buttonTo" %>
     <% end %>
+  </div>
 
 
 

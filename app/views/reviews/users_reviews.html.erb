@@ -1,0 +1,35 @@
+
+<h2><%= @user.username %>'s Reviews</h2>
+
+<div class="user-reviews">
+  <p><% @user.reviews.each do |review| %> </p>
+    <p><strong> Review for <%=review.company.name%> </strong></p>
+    <li><strong>salary:</strong><br><%= review.salary %></li></br>
+    <li><strong>Women in leadership positions?</strong><br> <%=review.women_exec_roles%></li></br>
+    <li><strong>Opportunities for promotion?</strong><br><%= review.promo_opps %></li></br>
+    <li><strong>Would you recommend a friend? </strong><br><%= review.recommend %></li></br>
+    <li><strong>Overall job satisfaction rating?(1-5) </strong><br><%= review.job_rating %></li></br>
+    <li><strong>Date Review Posted </strong><br><%= review.created_at.strftime('%m-%d-%Y')%></li></br>
+    <li><strong>Other details (i.e. Maternity leave, remote work, training etc.)</strong></li>
+      <%=review.content%></p></br>
+
+      <% if logged_in && review.user_id == current_user.id %>
+        <p>
+          <%= link_to "Edit Review", edit_company_review_path(review.company, review), method: :get %>
+          <%= link_to "Delete Review", company_review_path(review.company, review), {controller: 'reviews', action: 'destroy', method: :delete, confirm: "Are you sure?"} %>
+          <%= link_to "See Company", company_path(review.company_id), :method => :get %>
+        </p>
+      <% end %>
+    <%end%>
+</div>
+
+
+
+<div class="main-icons">
+    <% if logged_in && current_user %>
+    <p>
+      <%= button_to "My Profile", user_path(current_user), method: :get, class: "buttonTo" %><br>
+      <%= button_to "Back to Companies", companies_url, method: :get, class: "buttonTo" %>
+    </p>
+    <% end %>
+</div>
