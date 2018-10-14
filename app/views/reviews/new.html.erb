@@ -1,6 +1,8 @@
-<h2> Create a Review </h2>
+
 <% if !params[:company_id] %>
+<h2> Create a Review </h2>
 <%= render 'form_with_co' %>
 <% else %>
+<h2> Create a Review for <%=@company.name%> </h2>
 <%= render 'form'%>
 <% end %>

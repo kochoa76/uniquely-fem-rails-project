@@ -13,6 +13,7 @@
   </div>
 <% end %>
 
+<div class="form" data-id= "<%=@company.id%>">
 <%= form_for([@company, @review]) do |f| %>
 
       <%= f.label :salary, "Your Salary:" %>
@@ -38,8 +39,12 @@
       <%= f.label :created_at, "Date Review Posted" %>
       <%= f.date_field :created_at, :value => Time.now.strftime('%m-%d-%Y')%>
       <br></br>
- <%= f.submit %>
+ <%= f.submit :class => "submitReview" %>
 <% end %>
+</div>
+
+<div id="reviewResult">
+</div>
 
 <% if logged_in %>
     <p>

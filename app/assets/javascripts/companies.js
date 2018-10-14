@@ -150,7 +150,10 @@ Company.prototype.formatNext = function() {
   Company.prototype.formatSeeMore = function() {
     console.log(this.description)
     let seeMoreHTML = `
+    <span><strong>Location:</strong> ${this.city}
+    <strong>Employees:</strong> ${this.size} </span>
     <p> ${this.description}</p>
+
    `
    return seeMoreHTML
   }

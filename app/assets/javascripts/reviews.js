@@ -8,19 +8,42 @@ const reviewClickHandlers = () => {
   $(document).on("click", ".js-nextReview", function() {
     let reviewId = $(this).attr('data-id')
     let companyId = $('.companyReviews').attr("data-id")
-    // let trueId = parseInt(reviewId) + 1
-    // history.pushState(null, null, `companies/${companyId}/reviews/${trueId}`)
     companyName(companyId);
     seeNextReview(companyId, reviewId);
   })
 }
 
-// $(document).on("click", ".next-review", function() {
-//   let reviewId = $(this).attr('data-id')
-//   let companyId = $('.companyReviews').attr("data-id")
-//   companyName(companyId);
-//   seeNextReview(companyId, reviewId)
-// })
+// $(document).on("click", ".form", function(){
+//   $('form').submit(function(event) {
+//     companyId = $('.form').attr('data-id')
+//     event.preventDefault();
+//     values = $(this).serialize()
+//     posting = $.post(`/companies/${companyId}/reviews.json`, values)
+//     posting.done(function(data) {
+//       $('#reviewResult').text(data)
+//       })
+//     })
+//   })
+
+
+  $(document).on('submit', 'form#new_review', function(event){
+    event.preventDefault();
+    console.log(this)
+    let $form = $(this);
+    let action = $form.attr("action");
+    let params = $form.serialize();
+    // let companyId = $('.form').attr('data-id')
+
+  $.ajax({
+    url: action,
+    data: params,
+    dataType: "json",
+    type: "POST",
+    success: function(data) {
+      $('div#reviewResult').append(data)
+    }
+  })
+})
 
 const companyName = (companyId) => {
   $.ajax({
@@ -34,20 +57,6 @@ const companyName = (companyId) => {
     }
   })
 }
-
-// const showReview = (companyId) => {
-//   $.ajax({
-//     method: 'get',
-//     url: `/companies/${companyId}/reviews.json`
-//     success: function(company) {
-//       $('#app-container').html('')
-//       let newCompany = new Company(company)
-//       let companyHTML = newCompany.formatShow()
-//       $('#app-container').append(companyHTML)
-//     }
-//     })
-//   }
-
 
 const seeNextReview = (companyId, reviewId) => {
   $.ajax({
@@ -88,7 +97,7 @@ Company.prototype.formatCompanyName = function() {
   }
 
 Review.prototype.formatNextReview = function() {
-  console.log(this)
+
 let companyId = $('.companyReviews').attr("data-id")
 
   seeNextReviewHTML = `
@@ -106,3 +115,9 @@ let companyId = $('.companyReviews').attr("data-id")
   `
   return seeNextReviewHTML
 }
+
+// Review.prototype.formatNextReview = function() {
+//   seePostHTML = `
+//     <p> Thank you for your review! </p>
+//   `
+//   }

@@ -8,8 +8,7 @@ class Review < ApplicationRecord
 
   # scope :rating_desc, -> { includes(:job_rating).order(job_rating: :desc) }
 
-  # scope :avg_rated, -> {group(:company_id).order('avg(job_rating) desc').first}
-  # scope :avg_review, -> {group(:company_id).order('avg(job_rating) desc').first}
+  scope :avg_rated, -> {group(:company_id).order('avg(job_rating) desc').first}
 
   def company_attributes=(company_attribute)
       self.company = Company.find_or_create_by(company_attribute)

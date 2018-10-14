@@ -13,6 +13,7 @@
   </div>
 <% end %>
 
+<div class="form">
 <%= form_for(@review) do |f| %>
       <%= f.fields_for :company, @review.build_company do |company| %>
       <%= company.label :name, "Company Name:" %>
@@ -48,6 +49,7 @@
       <br></br>
  <%= f.submit %>
 <% end %>
+</div>
 
 <% if logged_in %>
     <p>
