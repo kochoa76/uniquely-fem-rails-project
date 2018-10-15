@@ -21,6 +21,7 @@ const seeReviews = () => {
   $(document).on("click", "a#js-seeAllReviews", function(event){
     event.preventDefault();
     let href = $(this).attr("href")
+     history.pushState(null, null, "/reviews")
     seeAllReviews(href)
   })
 }
