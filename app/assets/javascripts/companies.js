@@ -148,7 +148,6 @@ function Company(company) {
 //   }
 
   Company.prototype.formatSeeMore = function() {
-    console.log(this.description)
     let seeMoreHTML = `
     <span><strong>Location:</strong> ${this.city}
     <strong>Employees:</strong> ${this.size} </span>

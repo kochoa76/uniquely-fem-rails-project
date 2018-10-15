@@ -12,12 +12,12 @@
       <h2 class="companyHeader">Reviews for <%=@company.name%> </h2>
       <p><strong><%= @company.reviews.first.user.username %></strong> says:</p>
       <li><strong>salary:</strong><br><%= @company.reviews.first.salary %></li></br>
-      <li><strong>Women in leadership positions?</strong><br> <%=@company.reviews.first.women_exec_roles %></li></br>
-      <li><strong>Opportunities for promotion?</strong><br><%= @company.reviews.first.promo_opps %></li></br>
-      <li><strong>Would you recommend a friend? </strong><br><%= @company.reviews.first.recommend %></li></br>
-      <li><strong>Overall job satisfaction rating?(1-5) </strong><br><%= @company.reviews.first.job_rating %></li></br>
-      <li><strong>Date Review Posted </strong><br><%= @company.reviews.first.created_at.strftime('%m-%d-%Y')%></li></br>
-      <li><strong>Other details (i.e. Maternity leave, remote work, training etc.)</strong></li>
+      <li><strong>Women in leadership positions?:</strong><br> <%=@company.reviews.first.women_exec_roles %></li></br>
+      <li><strong>Opportunities for promotion?:</strong><br><%= @company.reviews.first.promo_opps %></li></br>
+      <li><strong>Would you recommend a friend?: </strong><br><%= @company.reviews.first.recommend %></li></br>
+      <li><strong>Overall job satisfaction rating?(1-5): </strong><br><%= @company.reviews.first.job_rating %></li></br>
+      <li><strong>Date Review Posted: </strong><br><%= @company.reviews.first.created_at.strftime('%m-%d-%Y')%></li></br>
+      <li><strong>Other details (i.e. Maternity leave, remote work, training etc.):</strong></li>
         <%=@company.reviews.first.content%></p></br>
       <button class="js-nextReview" data-id="<%=@company.reviews.first.id%>"><strong> See Next Review.. </strong></button>
     </div>
@@ -35,6 +35,6 @@
 
   <% if logged_in && current_user %>
     <%= button_to "My Profile", user_path(current_user), method: :get, class: "buttonTo" %>
-    
+
     <%= button_to "Back to Companies", companies_url, method: :get, class: "buttonTo" %>
   <% end %>

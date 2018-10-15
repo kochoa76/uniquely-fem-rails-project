@@ -4,9 +4,9 @@ $(() => {
   reviewClickHandlers()
 })
 
-$(() => {
-  attachListener();
-})
+// $(() => {
+//   attachListener();
+// })
 
 const reviewClickHandlers = () => {
   $(document).on("click", ".js-nextReview", function() {
@@ -17,45 +17,70 @@ const reviewClickHandlers = () => {
   })
 }
 
-// var attachListener = function() {
-// $(document).on("submit", "form#new_review", function(event){
-//
-//     event.preventDefault();
-//     action = $(this).attr("action");
-//     values = $(this).serialize()
-//     posting = $.post(action, values)
-//     posting.done(function(data) {
-//       // $('#reviewResult').text(data)
-//       alert(data)
-//       })
-//     })
-//   }
-
-
-var attachListener = function() {
-  $(document).on('submit', 'form.new_review', function(event){
+$(function(){
+  $("form#new_review").on("submit", function(event){
     event.preventDefault();
+    var $form = $(this)
+    var action = $form.attr("action");
+    var params = $form.serialize()
+    $.ajax({
+      url: action,
+      data: params,
+      dataType: "json",
+      method: "POST",
+    })
+    .success(function(json){
+      console.log(json)
+      $('#app-container').html("")
+      seeReviewHTML = `
+      <h2> Thank you for submitting your review! </h2>
 
-    let $form = $(this);
-    let action = $form.attr("action");
-    let params = $form.serialize();
-    // let companyId = $('.form').attr('data-id')
+      <p><strong>Your review for ${json.company.name}:</strong>
 
-  $.ajax({
-    url: action,
-    data: params,
-    dataType: "json",
-    type: "POST",
-    success: function(data) {
-      console.log(data)
-    },
-    error: function(data){
-        alert("fail");
-      }
-      // $('div#reviewResult').append(data)
+      <li><strong>salary:</strong> ${json.salary}</li>
+      <li><strong>Women in leadership positions?:</strong> ${json.women_exec_roles}</li>
+      <li><strong>Opportunities for promotion?:</strong> ${json.promo_opps} </li>
+      <li><strong>Would you recommend a friend?: </strong> ${json.recommend}</li>
+      <li><strong>Overall job satisfaction rating?:(1-5)  </strong> ${json.job_rating}</li>
+      <li><strong>Other details (i.e. Maternity leave, remote work, training etc.): </strong> ${json.content}</li>
+      </p>
+
+      <input type="button" onclick="location.href='/companies'" class="buttonTo" value="Main Page"</input><br>
+      `
+       $("#app-container").append(seeReviewHTML).css({"border": "1px solid #999", "background": "#fff", "border-radius": "5px", "padding-top": "15px", "padding-bottom": "25px", "padding-left": "25px", "padding-right": "25px", "text-align": "left", "margin": "60px"});
+
+    })
+    .error(function(response){
+      alert("There was an error")
+    })
+    })
   })
-})
-}
+
+
+// var attachListener = function() {
+//   $(document).on('submit', 'form.new_review', function(event){
+//     event.preventDefault();
+//
+//     let $form = $(this);
+//     let action = $form.attr("action");
+//     let params = $form.serialize();
+//     // let companyId = $('.form').attr('data-id')
+//
+//   $.ajax({
+//     url: action,
+//     data: params,
+//     dataType: "json",
+//     type: "POST",
+//     success: function(data) {
+//       console.log(data)
+//     },
+//     error: function(data){
+//         alert("fail");
+//       }
+//       // $('div#reviewResult').append(data)
+//   })
+// })
+// }
 
 const companyName = (companyId) => {
   $.ajax({

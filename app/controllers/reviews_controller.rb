@@ -23,7 +23,10 @@ class ReviewsController < ApplicationController
           @review = Review.create(reviews_params)
           @review.user_id = current_user.id
             if @review.save
-              redirect_to company_reviews_path(@review.company), :notice => "Thank you for submitting your review"
+              respond_to do |f|
+                f.html {redirect_to company_reviews_path(@review.company) }
+                f.json {render json: @review}
+              end 
             else
               redirect_to user_path(current_user), :notice => "boxes can't be blank"
             end
@@ -32,7 +35,10 @@ class ReviewsController < ApplicationController
           @review = @company.reviews.create(reviews_params)
           @review.user_id = current_user.id
             if @review.save
-               redirect_to company_reviews_path(@review.company), :notice => "Thank you for submitting your review"
+              respond_to do |f|
+                f.html {redirect_to company_reviews_path(@review.company)}
+                f.json {render json: @review}
+              end
             else
                redirect_to new_company_review_path, :notice => "boxes can't be blank"
             end

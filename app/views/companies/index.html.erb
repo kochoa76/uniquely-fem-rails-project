@@ -7,11 +7,14 @@
       <article>
       <h3><%= company.name %></h3>  <p><strong>Avg Rating: <%= company.reviews.avg_rated.job_rating%></strong></p>
       <div id="descrip-<%= company.id %>"><%= truncate(company.description) %></div><br>
+      <% if company.city && company.size && company.description %>
       <a class="seeMore" data-id="<%=company.id%>"><u> Show more.. </u></a><br></br>
+      <% end %>
       <input type="button" class="companybuttonTo" onclick="location.href='/companies/<%=company.id%>/reviews'" value="See <%=company.name %> Reviews"></input><br>
       <input type="button" data-id="<%=company.id%>" onclick="location.href='/companies/<%=company.id%>/reviews/new'" class="companybuttonTo" value="Submit a review"</input><br>
       <!-- <a href='/companies/<%=company.id%>/reviews/new' class="buttonTo" data-id="<%=company.id%>"> Submit Review for <%=company.name%> </a> -->
     </article>
       <% end %>
    </main>
+   <%= button_to "Back", user_path(current_user), method: :get, class: "buttonTo" %><br></br>
  </body>
