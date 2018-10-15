@@ -26,7 +26,7 @@ class ReviewsController < ApplicationController
               respond_to do |f|
                 f.html {redirect_to company_reviews_path(@review.company) }
                 f.json {render json: @review}
-              end 
+              end
             else
               redirect_to user_path(current_user), :notice => "boxes can't be blank"
             end
@@ -64,6 +64,23 @@ class ReviewsController < ApplicationController
           }
           end
         end
+
+    def all_reviews
+      @reviews = Review.all
+      respond_to do |f|
+        f.html {render @reviews}
+        f.json {render json: @reviews.to_json(
+          { :include => [
+              user: {
+                only: [:username]
+              },
+              company:{}
+            ]
+          }
+        )
+      }
+      end
+    end
 
     def highest_rated
       # @review = Review.avg_rated

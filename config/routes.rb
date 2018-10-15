@@ -9,6 +9,7 @@ resources :reviews, only: [:new, :create]
 # # resources :users do
 # #     resources :reviews, only: [:index]
 #   end
+get '/reviews' => "reviews#all_reviews"
 get '/users/:id/reviews' => "reviews#users_reviews"
 get 'company_reviews/highest_rated' => "reviews#highest_rated"
 # get 'auth/:provider/callback', to: 'sessions#create'

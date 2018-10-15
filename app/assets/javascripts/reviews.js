@@ -2,22 +2,30 @@
 
 $(() => {
   reviewClickHandlers()
+  seeReviews();
+  submitReview();
 })
 
-// $(() => {
-//   attachListener();
-// })
-
 const reviewClickHandlers = () => {
-  $(document).on("click", ".js-nextReview", function() {
+  $(document).on("click", ".js-nextReview", function(event) {
+    event.preventDefault();
     let reviewId = $(this).attr('data-id')
     let companyId = $('.companyReviews').attr("data-id")
-    companyName(companyId);
+    let href = $(this).attr("href")
+    companyName(href);
     seeNextReview(companyId, reviewId);
   })
 }
 
-$(function(){
+const seeReviews = () => {
+  $(document).on("click", "a#js-seeAllReviews", function(event){
+    event.preventDefault();
+    let href = $(this).attr("href")
+    seeAllReviews(href)
+  })
+}
+
+const submitReview = () => {
   $("form#new_review").on("submit", function(event){
     event.preventDefault();
     var $form = $(this)
@@ -30,70 +38,58 @@ $(function(){
       method: "POST",
     })
     .success(function(json){
-      console.log(json)
       $('#app-container').html("")
-      seeReviewHTML = `
-      <h2> Thank you for submitting your review! </h2>
-
-      <p><strong>Your review for ${json.company.name}:</strong>
-
-      <li><strong>salary:</strong> ${json.salary}</li>
-      <li><strong>Women in leadership positions?:</strong> ${json.women_exec_roles}</li>
-      <li><strong>Opportunities for promotion?:</strong> ${json.promo_opps} </li>
-      <li><strong>Would you recommend a friend?: </strong> ${json.recommend}</li>
-      <li><strong>Overall job satisfaction rating?:(1-5)  </strong> ${json.job_rating}</li>
-      <li><strong>Other details (i.e. Maternity leave, remote work, training etc.): </strong> ${json.content}</li>
-      </p>
-
-      <input type="button" onclick="location.href='/companies'" class="buttonTo" value="Main Page"</input><br>
-      `
-       $("#app-container").append(seeReviewHTML).css({"border": "1px solid #999", "background": "#fff", "border-radius": "5px", "padding-top": "15px", "padding-bottom": "25px", "padding-left": "25px", "padding-right": "25px", "text-align": "left", "margin": "60px"});
-
-    })
-    .error(function(response){
-      alert("There was an error")
-    })
+      reviewFormat(json)
     })
   })
+}
 
-
-// var attachListener = function() {
-//   $(document).on('submit', 'form.new_review', function(event){
-//     event.preventDefault();
-//
-//     let $form = $(this);
-//     let action = $form.attr("action");
-//     let params = $form.serialize();
-//     // let companyId = $('.form').attr('data-id')
-//
-//   $.ajax({
-//     url: action,
-//     data: params,
-//     dataType: "json",
-//     type: "POST",
-//     success: function(data) {
-//       console.log(data)
-//     },
-//     error: function(data){
-//         alert("fail");
-//       }
-//       // $('div#reviewResult').append(data)
-//   })
-// })
-// }
-
-const companyName = (companyId) => {
+const companyName = (href) => {
   $.ajax({
     method: 'get',
-    url: `/companies/${companyId}.json`,
+    url: href,
+    dataType: "json",
     success: function(company){
-      $("#app-container").html('')
+      $("#app-container").html("")
       let newCompany = new Company(company)
-      let seeCompanyNameHTML = newCompany.formatCompanyName();
-      $("#app-container").append(seeCompanyNameHTML)
+      let companyNameHTML = newCompany.formatCompanyName();
+      $("#app-container").append(companyNameHTML)
+
     }
   })
 }
+
+Company.prototype.formatCompanyName = function() {
+  seeCompanyNameHTML = `
+    <h2><strong> Reviews for ${this.name}</strong></h2>
+    `
+    return seeCompanyNameHTML
+  }
+
+const seeAllReviews= (href) => {
+  $.ajax({
+    method: 'get',
+    url: href,
+    dataType: "json",
+    success: function(reviews){
+      $("#app-container").html("")
+      reviews.forEach(review => {
+
+         allReviewsHTML = `
+        <h3><strong>Review for ${review.company.name}</strong></h3>
+        <p><strong>${review.user.username}</strong> says: </p>
+        <li><strong>salary:</strong> ${review.salary}</li>
+        <li><strong>Women in leadership positions?:</strong> ${review.women_exec_roles}</li>
+        <li><strong>Opportunities for promotion?:</strong> ${review.promo_opps} </li>
+        <li><strong>Would you recommend a friend?: </strong> ${review.recommend}</li>
+        <li><strong>Overall job satisfaction rating?:(1-5)  </strong> ${review.job_rating}</li>
+        <li><strong>Other details (i.e. Maternity leave, remote work, training etc.): </strong> ${review.content}</li>
+        `
+        $("#app-container").append(allReviewsHTML).css({"border": "1px solid #999", "background": "#fff", "border-radius": "5px", "padding-top": "15px", "padding-bottom": "25px", "padding-left": "25px", "padding-right": "25px", "text-align": "left", "margin": "60px"})
+      })
+      }
+    })
+  }
 
 const seeNextReview = (companyId, reviewId) => {
   $.ajax({
@@ -122,16 +118,7 @@ function Review(review, user) {
   this.created_at = review.created_at
   this.recommend = review.recommend
   this.username = review.user.username
-
-
 }
-
-Company.prototype.formatCompanyName = function() {
-  seeCompanyNameHTML = `
-    <h2><strong> Reviews for ${this.name}</strong></h2>
-    `
-    return seeCompanyNameHTML
-  }
 
 Review.prototype.formatNextReview = function() {
 
@@ -153,8 +140,19 @@ let companyId = $('.companyReviews').attr("data-id")
   return seeNextReviewHTML
 }
 
-// Review.prototype.formatNextReview = function() {
-//   seePostHTML = `
-//     <p> Thank you for your review! </p>
-//   `
-//   }
+const reviewFormat=(json)=> {
+  seeReviewHTML = `
+  <h2> Thank you for submitting your review! </h2>
+
+  <p><strong>Your review for ${json.company.name}:</strong>
+  <li><strong>salary:</strong> ${json.salary}</li>
+  <li><strong>Women in leadership positions?:</strong> ${json.women_exec_roles}</li>
+  <li><strong>Opportunities for promotion?:</strong> ${json.promo_opps} </li>
+  <li><strong>Would you recommend a friend?: </strong> ${json.recommend}</li>
+  <li><strong>Overall job satisfaction rating?:(1-5)  </strong> ${json.job_rating}</li>
+  <li><strong>Other details (i.e. Maternity leave, remote work, training etc.): </strong> ${json.content}</li>
+  </p>
+  <input type="button" onclick="location.href='/companies'" class="buttonTo" value="Main Page"</input><br>
+  `
+  $("#app-container").append(seeReviewHTML).css({"border": "1px solid #999", "background": "#fff", "border-radius": "5px", "padding-top": "15px", "padding-bottom": "25px", "padding-left": "25px", "padding-right": "25px", "text-align": "left", "margin": "60px"});
+}

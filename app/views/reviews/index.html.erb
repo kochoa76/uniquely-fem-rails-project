@@ -19,7 +19,7 @@
       <li><strong>Date Review Posted: </strong><br><%= @company.reviews.first.created_at.strftime('%m-%d-%Y')%></li></br>
       <li><strong>Other details (i.e. Maternity leave, remote work, training etc.):</strong></li>
         <%=@company.reviews.first.content%></p></br>
-      <button class="js-nextReview" data-id="<%=@company.reviews.first.id%>"><strong> See Next Review.. </strong></button>
+      <button class="js-nextReview" href="/companies/<%=@company.id%>" data-id="<%=@company.reviews.first.id%>"><strong> See Next Review.. </strong></button>
     </div>
   </ul>
 
