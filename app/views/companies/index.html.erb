@@ -13,8 +13,13 @@
       <input type="button" class="companybuttonTo" onclick="location.href='/companies/<%=company.id%>/reviews'" value="See <%=company.name %> Reviews"></input><br>
       <input type="button" data-id="<%=company.id%>" onclick="location.href='/companies/<%=company.id%>/reviews/new'" class="companybuttonTo" value="Submit a review"</input><br>
       <!-- <a href='/companies/<%=company.id%>/reviews/new' class="buttonTo" data-id="<%=company.id%>"> Submit Review for <%=company.name%> </a> -->
+      <% if logged_in && current_user.admin %>
+        <td><%= button_to "Delete Company", company_path(company), :method => :delete, :class => "companybuttonTo", :confirm => "Are you sure?"%></td>
+        <td><%= button_to "Edit Company", company_path(company), method: :get, class: "companybuttonTo"%></td>
+      <% end %>
     </article>
       <% end %>
+
    </main>
    <%= button_to "Back", user_path(current_user), method: :get, class: "buttonTo" %><br></br>
  </body>

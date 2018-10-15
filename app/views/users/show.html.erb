@@ -10,7 +10,7 @@
     <p>
     <%= link_to 'Main Page', companies_path, method: :get, :class => "navbuttonTo"  %>
     <br></br>
-    <%= link_to 'See my reviews', user_review_path, method: :get , :class => "navbuttonTo"%>
+    <%= link_to 'See my reviews', "/users/#{@user.id}/reviews", method: :get , :class => "navbuttonTo"%>
     <br></br>
     <%= link_to "Edit Account", edit_user_path(@user), method: :get, :class => "navbuttonTo" %>
     <br></br>

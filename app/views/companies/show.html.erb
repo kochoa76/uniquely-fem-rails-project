@@ -1,4 +1,5 @@
 <h2> Company Information </h2>
+<div id="showCompanies">
 <table class="table2">
   <thead>
     <tr>
@@ -6,15 +7,16 @@
     </tr>
   </thead>
 
+
   <tbody>
     <tr>
       <td><strong>Name </strong></td>
-      <td><strong>Number of Employees </strong></td>
+      <td><strong>Employees </strong></td>
       <td><strong>City (hq) </strong></td>
       <td><strong>State </strong></td>
-      <td><strong>Company Description</strong></td>
-      <td><strong> Average Rating by Reviews </strong></td>
-      <td><strong> Number of Reviews </strong></td>
+      <td><strong>Description</strong></td>
+      <td><strong> Avg Rating </strong></td>
+      <td><strong> # of Reviews </strong></td>
     </tr>
 
     <tr>
@@ -34,11 +36,12 @@
 </table>
 <br></br>
 <% if @company.reviews.exists? %>
-<%= button_to "See #{@company.name} reviews", company_reviews_path(@company), :method=> :get %>
-<%= button_to "See all Companies", companies_path, method: :get %>
+<%= button_to "See #{@company.name} reviews", company_reviews_path(@company), :method=> :get, class: "buttonTo" %>
+<%= button_to "See all Companies", companies_path, method: :get, class: "buttonTo" %>
 <% end %>
 
 <% if current_user.admin && logged_in %>
-<%= button_to "Edit Company", edit_company_path(@company), method: :get %>
-<%= button_to "See all Companies", companies_path, method: :get %>
+<%= button_to "Edit Company", edit_company_path(@company), method: :get, class: "buttonTo" %>
+<%= button_to "See all Companies", companies_path, method: :get, class: "buttonTo" %>
 <% end %>
+</div>
