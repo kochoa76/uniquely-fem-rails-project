@@ -34,10 +34,13 @@
     </tr>
   </tbody>
 </table>
+<div class="sortedReviews">
+</div> 
 <br></br>
 <% if @company.reviews.exists? %>
 <%= button_to "See #{@company.name} reviews", company_reviews_path(@company), :method=> :get, class: "buttonTo" %>
 <%= button_to "See all Companies", companies_path, method: :get, class: "buttonTo" %>
+<%= link_to "See Sorted Reviews", @company,  id: "sortedReviews" %>
 <% end %>
 
 <% if current_user.admin && logged_in %>

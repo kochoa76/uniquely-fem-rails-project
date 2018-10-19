@@ -61,7 +61,7 @@ const companyName = (href) => {
 }
 
 Company.prototype.formatCompanyName = function() {
-  seeCompanyNameHTML = `
+  const seeCompanyNameHTML = `
     <h2><strong> Reviews for ${this.name}</strong></h2>
     `
     return seeCompanyNameHTML
@@ -74,6 +74,7 @@ const seeAllReviews= (href) => {
     dataType: "json",
     success: function(reviews){
       $("#app-container").html("")
+
       reviews.forEach(review => {
 
          allReviewsHTML = `
@@ -136,7 +137,6 @@ let companyId = $('.companyReviews').attr("data-id")
     ${this.content}</p><br>
   <a class="companyReviews" data-id="${this.company_id}">
   <a class="js-nextReview" data-id="${this.id}"><strong>See Next Review..</strong></a><br></br>
-
   `
   return seeNextReviewHTML
 }

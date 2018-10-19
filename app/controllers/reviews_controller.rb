@@ -116,6 +116,14 @@ class ReviewsController < ApplicationController
       @user = User.find_by_id(session[:user_id])
     end
 
+    def show
+      @review = Review.find(params[:id])
+      respond_to do |f|
+        f.html {render @review}
+        f.json {render json: @review}
+      end 
+    end
+
 
 
   private

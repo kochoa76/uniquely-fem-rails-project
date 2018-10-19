@@ -4,7 +4,7 @@ resources :users
 resources :companies do
   resources :reviews
 end
-resources :reviews, only: [:new, :create]
+resources :reviews, only: [:new, :create, :show]
 
 # # resources :users do
 # #     resources :reviews, only: [:index]
