@@ -1,5 +1,5 @@
 
-This is a Rails-based app for women looking for more information on companies in their job search. Users can create their own account under an anonymous alias, and create reviews based on their past experiences at one or more companies. Once the user submits a review the review will populate under that specific company where other users can view and gain a better understanding of success for women specifically at that company. Users can also log in via Facebook.
+This is a Rails-based app with added Javascript/Jquery front-end for women looking for more information on companies in their job search. Users can create their own account under an anonymous alias, and create reviews based on their past experiences at one or more companies. Once the user submits a review the review will populate under that specific company where other users can view and gain a better understanding of success for women specifically at that company. Users can also log in via Facebook.
 
 Ruby version Ruby 2.3.3p222
 
