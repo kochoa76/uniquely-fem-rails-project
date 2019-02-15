@@ -3,11 +3,10 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 //
 
-  $(document).on("click", ".seeMore", function(){
-    let id= ($(this).attr('data-id'))
-      seeMore(id);
-  }
-)
+$(document).on("click", ".seeMore", function(){
+  let id= ($(this).attr('data-id'))
+    seeMore(id);
+  })
 
 $(() => {
   $(document).on("click", "#sortedReviews", function(event) {
@@ -19,13 +18,12 @@ $(() => {
 })
 
 
-  const seeSortedReviews = (href) => {
-    $.ajax({
-      method: 'get',
-      url: href,
-      dataType: "json",
-      success: function(company) {
-
+const seeSortedReviews = (href) => {
+  $.ajax({
+    method: 'get',
+    url: href,
+    dataType: "json",
+    success: function(company) {
       company.reviews.sort(function(a, b){
         return a.job_rating - b.job_rating
       })
@@ -34,27 +32,25 @@ $(() => {
         `
          <p>${review.job_rating}</p>
          <p>${review.content}</p>
-
         `
-        
         $(".sortedReviews").append(seeSortedReviews)
       })
     }
   })
-  }
-  const seeMore = (id) => {
-    $.ajax({
-      method: 'get',
-      url: `/companies/${id}.json`,
-      success: function(company) {
-      $("#descrip-" +id).html('')
-          let newCompany = new Company(company)
-          let seeMoreHTML = newCompany.formatSeeMore();
+}
 
-          $('#descrip-' + id).append(seeMoreHTML);
-        }
-      })
+const seeMore = (id) => {
+  $.ajax({
+    method: 'get',
+    url: `/companies/${id}.json`,
+    success: function(company) {
+      $("#descrip-" +id).html('')
+      let newCompany = new Company(company)
+      let seeMoreHTML = newCompany.formatSeeMore();
+      $('#descrip-' + id).append(seeMoreHTML);
     }
+  })
+}
 
 function Company(company) {
   this.id= company.id
@@ -65,14 +61,12 @@ function Company(company) {
   this.description = company.description
 }
 
-
-  Company.prototype.formatSeeMore = function() {
-    console.log(this.description)
-    let seeMoreHTML = `
-    <span><strong>Location:</strong> ${this.city}
-    <strong>Employees:</strong> ${this.size} </span>
-    <p> ${this.description}</p>
-
-   `
-   return seeMoreHTML
-  }
+Company.prototype.formatSeeMore = function() {
+  let seeMoreHTML =
+  `
+  <span><strong>Location:</strong> ${this.city}
+  <strong>Employees:</strong> ${this.size} </span>
+  <p> ${this.description}</p>
+  `
+  return seeMoreHTML
+}
